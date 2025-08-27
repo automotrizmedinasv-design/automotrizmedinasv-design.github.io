@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AUTOMOTRIZ MEDINA SV – Diagnóstico Electrónico</title>
+  <style>
+    :root{ --bg:#0c1020; --panel:#12183a; --muted:#aab6ff; --brand:#4f7cff; --brand2:#11b6d7; --ok:#12c48b; --danger:#ff6464; --text:#eef2ff; }
+    html,body{margin:0;background:#0c1020;color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(12,16,32,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .dot{width:12px;height:12px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+    .links{display:flex;gap:18px;font-size:14px}
+    .cta{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(79,124,255,.18),rgba(79,124,255,.06))}
+    /* HERO */
+    .hero{padding:56px 0 28px;border-bottom:1px solid rgba(255,255,255,.06);background:radial-gradient(1200px 600px at 50% -200px,rgba(79,124,255,.15),transparent)}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 10px}
+    .hero p{color:#c8d1ff;margin:0 0 14px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#10183b;border:1px solid rgba(255,255,255,.08)}
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .col-4{grid-column:span 4}
+    .col-6{grid-column:span 6}
+    .col-8{grid-column:span 8}
+    .col-12{grid-column:span 12}
+    @media (max-width:900px){.col-4,.col-6,.col-8{grid-column:span 12}}
+    /* CARDS & SECTIONS */
+    .section{padding:28px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .card{background:#12183a;border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.06)}
+    .card[role=button]{cursor:pointer}
+    h2{margin:0 0 12px}
+    p.muted{color:#c8d1ff;margin:6px 0 0}
+    ul.clean{margin:8px 0 0;padding-left:18px}
+    /* FORM */
+    label{display:block;margin:10px 0 4px}
+    select, textarea, input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px solid #2a315a;background:#0d1433;color:var(--text)}
+    textarea{min-height:100px}
+    .btn{margin-top:18px;padding:12px 18px;border-radius:10px;border:none;font-weight:bold;cursor:not-allowed;opacity:.6;background:linear-gradient(180deg,rgba(79,124,255,.25),rgba(79,124,255,.1));color:var(--text)}
+    .btn.ready{cursor:pointer;opacity:1}
+    .bad{color:var(--danger);font-size:13px;display:none}
+    /* MODAL */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
+    .modal.open{display:flex}
+    .modal-card{width:min(860px,92vw);max-height:90vh;overflow:auto;background:#12183a;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px}
+    .close-x{background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:10px;color:#fff;padding:6px 10px;cursor:pointer}
+    /* FOOTER */
+    .footer{padding:20px 0;color:#b8c2ff;font-size:13px}
+    .brands{display:flex;flex-wrap:wrap;gap:10px}
+    .brand-pill{padding:6px 10px;border-radius:999px;background:#10183b;border:1px solid rgba(255,255,255,.08);font-size:12px}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span class="dot"></span> AUTOMOTRIZ MEDINA SV</div>
+      <div class="links">
+        <a href="#servicios">Servicios</a>
+        <a href="#marcas">Marcas</a>
+        <a href="#flujo">Cómo trabajamos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <a class="cta" href="#" data-open-form>Agendar diagnóstico</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap grid">
+      <div class="col-8">
+        <h1>Diagnóstico electrónico <span style="color:var(--brand)">especializado</span> para resolver fallas de verdad</h1>
+        <p>Intervenimos cuando los métodos comunes ya no dan resultados. Sin adivinar; con procesos, datos y criterio técnico.</p>
+        <div class="badges">
+          <span class="badge">Solo con cita</span>
+          <span class="badge">Año modelo ≥ 2005</span>
+          <span class="badge">Programación avanzada: Ford & Chevrolet</span>
+          <span class="badge">No atendemos marcas europeas</span>
+        </div>
+        <div style="margin-top:14px"><a class="cta" href="#" data-open-form>Ir al formulario</a></div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <h3 style="margin:0 0 6px">¿Falla compleja?</h3>
+          <p class="muted">Envíanos los datos y te guiamos para agendar.</p>
+          <div style="margin-top:10px"><a class="cta" href="#" data-open-form>Agendar ahora</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="section">
+    <div class="wrap grid">
+      <div class="col-4">
+        <div class="card" role="button" tabindex="0" data-open-form>
+          <h2>Diagnóstico</h2>
+          <p class="muted">Eléctrico y electrónico, escáner avanzado, osciloscopio, pruebas dirigidas, lectura/interpretación DTC.</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card" role="button" tabindex="0" data-open-form>
+          <h2>Programación</h2>
+          <p class="muted">Ford y Chevrolet (ECU, llaves, inmovilizadores, VIN, etc.). Consulta disponibilidad según modelo.</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card" role="button" tabindex="0" data-open-form>
+          <h2>Reparación experta</h2>
+          <p class="muted">Atendemos fallas complejas y sistemas eléctricos. <b>No</b> realizamos servicios exprés ni cambios de aceite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCAS -->
+  <section id="marcas" class="section">
+    <div class="wrap">
+      <h2>Marcas que atendemos</h2>
+      <p class="muted">Honda · Toyota · Nissan · Mitsubishi · Kia · Hyundai · Mazda · Jeep · Dodge · Chevrolet · Ford</p>
+      <div class="brands" style="margin-top:10px">
+        <span class="brand-pill">Honda</span><span class="brand-pill">Toyota</span><span class="brand-pill">Nissan</span><span class="brand-pill">Mitsubishi</span><span class="brand-pill">Kia</span><span class="brand-pill">Hyundai</span><span class="brand-pill">Mazda</span><span class="brand-pill">Jeep</span><span class="brand-pill">Dodge</span><span class="brand-pill">Chevrolet</span><span class="brand-pill">Ford</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLUJO -->
+  <section id="flujo" class="section">
+    <div class="wrap grid">
+      <div class="col-4"><div class="card"><h3>1) Recepción técnica</h3><p class="muted">Recopilamos síntomas, contexto, historial y condiciones de reproducción.</p></div></div>
+      <div class="col-4"><div class="card"><h3>2) Pruebas dirigidas</h3><p class="muted">Escáner, esquemas, mediciones y pruebas de laboratorio según árbol lógico.</p></div></div>
+      <div class="col-4"><div class="card"><h3>3) Informe y plan</h3><p class="muted">Entregamos diagnóstico, causa raíz y opciones de solución.</p></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <div class="wrap grid">
+      <div class="col-6">
+        <div class="card">
+          <h2>Información del taller</h2>
+          <ul class="clean">
+            <li><b>Nombre:</b> AUTOMOTRIZ MEDINA SV</li>
+            <li><b>Eslogan:</b> Especialistas en Diagnóstico Electrónico</li>
+            <li><b>Ubicación:</b> Carretera Ruta Militar, 100 mts al oriente del Puente Urbina, San Miguel.</li>
+            <li><b>WhatsApp:</b> 7110-3333 · <b>Citas:</b> Solo con agendamiento</li>
+            <li><b>Alcance:</b> Diagnóstico eléctrico/electrónico. No atendemos marcas europeas.</li>
+            <li><b>Año mínimo:</b> 2005 o más nuevo.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <h2>Políticas clave</h2>
+          <ul class="clean">
+            <li>Diagnóstico profesional, sin adivinanzas.</li>
+            <li>No realizamos servicios exprés ni cambios de aceite.</li>
+            <li>Programación disponible principalmente en Ford y Chevrolet (consultar).</li>
+          </ul>
+          <p class="muted">¿Necesitas ayuda? Abre el formulario y te respondemos por WhatsApp.</p>
+          <div style="margin-top:10px"><a class="cta" href="#" data-open-form>Abrir formulario</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap footer">© <span id="yearNow"></span> AUTOMOTRIZ MEDINA SV · Calidad, honestidad y criterio técnico</div>
+
+  <!-- MODAL FORMULARIO -->
+  <div id="formModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h2 style="margin:0">Solicitar diagnóstico por WhatsApp</h2>
+        <button id="closeForm" class="close-x" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="grid">
+        <div class="col-6">
+          <label for="brand">Marca</label>
+          <select id="brand"><option value="">Selecciona marca</option></select>
+        </div>
+        <div class="col-6">
+          <label for="model">Modelo</label>
+          <select id="model" disabled><option value="">Selecciona modelo</option></select>
+          <input type="text" id="otherModel" placeholder="Escribe el modelo" style="display:none;margin-top:6px" />
+          <div id="otherErr" class="bad">Debes escribir el modelo si seleccionas "Otros".</div>
+        </div>
+        <div class="col-6">
+          <label for="year">Año (≥ 2005)</label>
+          <select id="year" disabled><option value="">Selecciona año</option></select>
+        </div>
+        <div class="col-12">
+          <label for="fault">Describe la falla</label>
+          <textarea id="fault" placeholder="Ej.: No arranca en caliente, código P0340, ya cambiaron sensor CKP..."></textarea>
+          <div id="faultErr" class="bad">La descripción debe tener al menos 10 caracteres.</div>
+        </div>
+        <div class="col-12">
+          <label><input type="checkbox" id="confirm" /> Confirmo que la información es correcta</label>
+        </div>
+        <div class="col-12">
+          <button id="sendBtn" class="btn" disabled>Enviar por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const PHONE_SV = '50371103333'; // WhatsApp destino (+503 El Salvador)
+  const MIN_YEAR = 2005;
+
+  const CATALOG = {
+    'Toyota': ['Camry','Corolla','RAV4','Highlander','Tacoma','Tundra','Sienna','Prius','4Runner','Sequoia','Avalon','Venza','Crown','Grand Highlander','Land Cruiser','Corolla Cross','bZ4X'],
+    'Nissan': ['Altima','Sentra','Versa','Rogue','Murano','Pathfinder','Frontier','Titan','Maxima','Kicks','Armada','LEAF','Z','GT-R'],
+    'Honda': ['Civic','Accord','CR-V','Pilot','HR-V','Odyssey','Ridgeline','Fit','Passport','Insight','Prologue'],
+    'Mitsubishi': ['Outlander','Outlander Sport','Eclipse Cross','Mirage','Lancer','Galant','Montero','i-MiEV'],
+    'Kia': ['Rio','Forte','Soul','Sportage','Sorento','Telluride','Seltos','Carnival','K5','Stinger','EV6','EV9','Niro'],
+    'Hyundai': ['Elantra','Sonata','Accent','Tucson','Santa Fe','Palisade','Kona','Venue','Ioniq','Ioniq 5','Ioniq 6','Santa Cruz','Nexo'],
+    'Mazda': ['Mazda3','Mazda6','CX-3','CX-30','CX-5','CX-50','CX-9','CX-90','CX-70','MX-5 Miata'],
+    'Jeep': ['Wrangler','Grand Cherokee','Grand Cherokee L','Cherokee','Compass','Renegade','Gladiator','Patriot','Commander','Wagoneer','Grand Wagoneer'],
+    'Dodge': ['Charger','Challenger','Durango','Journey','Grand Caravan','Nitro','Avenger','Hornet'],
+    'Chevrolet': ['Silverado 1500','Colorado','Equinox','Traverse','Tahoe','Suburban','Malibu','Impala','Cruze','Sonic','Trax','Trailblazer','Blazer','Bolt EV','Camaro','Corvette'],
+    'Ford': ['F-150','Ranger','Maverick','Explorer','Escape','Expedition','Edge','Bronco','Bronco Sport','Fusion','Focus','Fiesta','Mustang','Mustang Mach-E','Transit','Transit Connect']
+  };
+
+  const modal = document.getElementById('formModal');
+  const openers = document.querySelectorAll('[data-open-form]');
+  const closeBtn = document.getElementById('closeForm');
+  const yearNow = document.getElementById('yearNow');
+  const brandSel = document.getElementById('brand');
+  const modelSel = document.getElementById('model');
+  const otherModel = document.getElementById('otherModel');
+  const otherErr = document.getElementById('otherErr');
+  const yearSel = document.getElementById('year');
+  const faultTx = document.getElementById('fault');
+  const faultErr = document.getElementById('faultErr');
+  const confirmCb = document.getElementById('confirm');
+  const sendBtn = document.getElementById('sendBtn');
+
+  yearNow.textContent = new Date().getFullYear();
+
+  function openForm(){ modal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeForm(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+
+  openers.forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openForm(); });
+    el.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openForm(); }});
+  });
+  closeBtn.addEventListener('click', e => { e.preventDefault(); closeForm(); });
+  modal.addEventListener('click', e => { if(e.target === modal) closeForm(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeForm(); });
+
+  // Poblar marcas
+  Object.keys(CATALOG).forEach(m => {
+    const opt = document.createElement('option'); opt.value = m; opt.textContent = m; brandSel.appendChild(opt);
+  });
+
+  brandSel.addEventListener('change', () => {
+    modelSel.innerHTML = '<option value="">Selecciona modelo</option>';
+    yearSel.innerHTML = '<option value="">Selecciona año</option>';
+    modelSel.disabled = !brandSel.value;
+    yearSel.disabled = true;
+    otherModel.style.display = 'none';
+    if (brandSel.value) {
+      CATALOG[brandSel.value].forEach(md => {
+        const o = document.createElement('option'); o.value = md; o.textContent = md; modelSel.appendChild(o);
+      });
+      const other = document.createElement('option'); other.value = 'Otros'; other.textContent = 'Otros'; modelSel.appendChild(other);
+    }
+    validate();
+  });
+
+  modelSel.addEventListener('change', () => {
+    yearSel.innerHTML = '<option value="">Selecciona año</option>';
+    const cur = new Date().getFullYear();
+    for (let y = cur; y >= MIN_YEAR; y--) {
+      const o = document.createElement('option'); o.value = y; o.textContent = y; yearSel.appendChild(o);
+    }
+    yearSel.disabled = !modelSel.value;
+    otherModel.style.display = (modelSel.value === 'Otros') ? 'block' : 'none';
+    validate();
+  });
+
+  yearSel.addEventListener('change', validate);
+  faultTx.addEventListener('input', validate);
+  confirmCb.addEventListener('change', validate);
+  otherModel.addEventListener('input', validate);
+
+  function validate(){
+    const okBrand = !!brandSel.value;
+    const okModel = !!modelSel.value;
+    const okOther = modelSel.value !== 'Otros' || (otherModel.value.trim().length > 0);
+    otherErr.style.display = (!okOther && modelSel.value==='Otros') ? 'block' : 'none';
+    const okYear  = !!yearSel.value && Number(yearSel.value) >= MIN_YEAR;
+    const okFault = (faultTx.value || '').trim().length >= 10;
+    faultErr.style.display = okFault ? 'none' : 'block';
+    const allOk = okBrand && okModel && okOther && okYear && okFault && confirmCb.checked;
+    sendBtn.disabled = !allOk;
+    sendBtn.classList.toggle('ready', allOk);
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const modeloFinal = modelSel.value === 'Otros' ? otherModel.value.trim() : modelSel.value;
+    const lines = [
+      'Hola Automotriz Medina, quiero agendar diagnóstico.',
+      `Marca: ${brandSel.value}`,
+      `Modelo: ${modeloFinal}`,
+      `Año: ${yearSel.value}`,
+      `Falla: ${(faultTx.value || '').trim()}`,
+      'Origen: Sitio web (Google Sites)'
+    ];
+    const msg = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${PHONE_SV}?text=${msg}`, '_blank');
+  });
+});
+</script>
+</body>
+</html>
