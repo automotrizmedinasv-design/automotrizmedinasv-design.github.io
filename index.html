@@ -542,7 +542,6 @@
 }
 </style>
 <style id="hero-h1-case-fix">.hero h1{ text-transform:none !important; }</style>
-
 <style id="hook-override-v9">
 /* --- OVERRIDE v9: Hook con salto manual y alineado a la izquierda --- */
 .amx-subhook, .hero .amx-subhook {
@@ -566,7 +565,6 @@
 }
 /* --- FIN OVERRIDE v9 --- */
 </style>
-
 <style id="calendly-loading-style">
   .calendly-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(10,15,25,.78);backdrop-filter:blur(2px)}
   .calendly-overlay.show{display:flex}
@@ -580,22 +578,177 @@
   .cal-iframe-wrap{display:none;margin-top:10px;height:78vh}
   .cal-iframe{width:100%;height:100%;border:0;border-radius:12px;background:#fff}
 </style>
+<style id="spot-premium-style">
+.spot-premium-wrap{
+  max-width: 980px; margin: 18px auto 12px; padding: 2px;
+  border-radius: 18px;
+  background: linear-gradient(120deg,#0ea5e9, #6366f1, #22c55e);
+  position: relative; isolation: isolate;
+}
+.spot-premium{
+  background: rgba(255,255,255,.85);
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(15,23,42,.08);
+  position: relative; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(2,6,23,.06);
+}
+.spot-premium::before{
+  content:""; position:absolute; width: 260px; height: 260px;
+  border-radius: 50%; right:-80px; top:-100px;
+  background: radial-gradient(closest-side, rgba(99,102,241,.18), rgba(99,102,241,0));
+}
+.spot-premium::after{
+  content:""; position:absolute; width: 220px; height: 220px;
+  border-radius: 50%; left:-90px; bottom:-110px;
+  background: radial-gradient(closest-side, rgba(34,197,94,.18), rgba(34,197,94,0));
+}
+.spot-premium .row{
+  display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center;
+}
+.spot-crown{
+  display:inline-flex; align-items:center; justify-content:center;
+  width: 54px; height: 54px; border-radius: 14px;
+  background: linear-gradient(180deg,#0ea5e9,#2563eb); color:#fff;
+  box-shadow: 0 8px 18px rgba(37,99,235,.18);
+  border: 1px solid rgba(255,255,255,.3);
+}
+.spot-crown svg{ width:28px; height:28px; }
+.spot-badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.32rem .6rem; border-radius:999px;
+  background: rgba(2,6,23,.06); border:1px solid rgba(2,6,23,.09);
+  font-weight:800; letter-spacing:.3px; font-size:.85rem; color:#0b1221;
+}
+.spot-title{ margin:6px 0 4px; font-size: 22px; line-height:1.25; color:#0b1221; font-weight: 900; }
+.spot-text{ margin: 4px 0 0; font-size: 16px; color:#334155; line-height:1.55; }
+.spot-note{ margin-top: 8px; font-size: 14px; color:#0b1221; font-weight:700; }
+@media (max-width:640px){
+  .spot-premium-wrap{ margin: 14px auto; }
+  .spot-premium .row{ grid-template-columns: 1fr; gap: 10px; text-align:left; }
+  .spot-crown{ width:48px; height:48px; border-radius:12px; }
+  .spot-title{ font-size:20px; }
+  .spot-text{ font-size:15px; }
+}
 
+/* guarantee subline */
+.spot-guarantee{
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(16,185,129,.10);
+  border: 1px solid rgba(16,185,129,.25);
+  color: #065f46;
+  font-weight: 700;
+  font-size: 14px;
+}
+.spot-guarantee svg{ width:18px; height:18px; }
+@media (max-width:640px){
+  .spot-guarantee{ font-size: 13px; }
+}
+</style>
+
+
+<style id="spot-glow-style">
+/* ===== Glow direccional para guiar la mirada al spot ===== */
+.spot-glow-wrap{
+  display:block;
+  margin: 8px auto -2px;
+  max-width: 980px;
+  position: relative;
+  height: 28px; /* Alto pequeño, es un acento visual */
+  overflow: visible;
+}
+.spot-glow{
+  position:absolute; inset: -16px 10% -12px 10%;
+  border-radius: 999px;
+  background:
+    radial-gradient(60% 120% at 50% 0%,
+      rgba(37,99,235,.22) 0%,
+      rgba(99,102,241,.18) 28%,
+      rgba(14,165,233,.10) 52%,
+      rgba(255,255,255,0) 80%);
+  filter: blur(8px);
+  opacity: .75;
+  animation: glowPulse 3.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes glowPulse{
+  0%, 100% { opacity: .65; transform: translateY(0px) scaleX(1); }
+  50%      { opacity: .9;  transform: translateY(2px) scaleX(1.02); }
+}
+@media (max-width:640px){
+  .spot-glow-wrap{ height: 22px; margin: 6px auto -2px; }
+  .spot-glow{ inset: -14px 12% -10px 12%; filter: blur(7px); }
+}
+</style>
+<style>
+.exclusivo-prioridad{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.badge{font-weight:700;padding:6px 12px;border-radius:999px;display:inline-block}
+.badge.exclusivo{background:#fff;border:1px solid #cfd6e4;color:#0b0f1a;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.badge.prioridad{background:#cc0014;color:#fff;box-shadow:0 0 0 2px rgba(204,0,20,.15) inset}
+@media (prefers-reduced-motion:no-preference){
+  .badge.prioridad{animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+}
+</style>
+<style>
+.prioridad-centered{
+  text-align:center;
+  font-size:1.6rem;
+  font-weight:900;
+  color:#cc0014;
+  margin:10px 0;
+}
+</style>
+<style>
+.exclusivo-prioridad--center{justify-content:center}
+.badge.prioridad{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+/* Garantizar la franja con fondo degradado en caso de que no exista */
+.exclusivo-prioridad{
+  display:flex;
+  align-items:center;
+  background: linear-gradient(90deg, #e9f3fc, #eaeefc);
+  padding: 8px 16px;
+  border-radius: 10px;
+  gap:12px;
+}
+.badge{
+  font-weight:700;
+  padding:6px 12px;
+  border-radius:999px;
+  display:inline-block
+}
+.badge.prioridad{
+  background:#cc0014;
+  color:#fff;
+  box-shadow:0 0 0 2px rgba(204,0,20,.15) inset
+}
+</style>
 </head>
 <body>
-
-<div id="calendly-overlay" class="calendly-overlay" role="dialog" aria-modal="true" aria-label="Agendar diagnóstico">
-  <div class="calendly-box">
-    <h3 class="cal-title">Preparando tu agenda…</h3>
-    <p class="cal-sub">Estamos prellenando los datos de tu vehículo. Esto puede tardar unos segundos.</p>
-    <div class="cal-spinner" aria-hidden="true"></div>
-    <div class="cal-actions">
-      <button id="cal-btn-cancel" class="btn-ghost">Cancelar</button>
-    </div>
-    <div class="cal-iframe-wrap" id="cal-iframe-wrap"></div>
-  </div>
+<div aria-label="Agendar diagnóstico" aria-modal="true" class="calendly-overlay" id="calendly-overlay" role="dialog">
+<div class="calendly-box">
+<h3 class="cal-title">Preparando tu agenda…</h3>
+<p class="cal-sub">Estamos prellenando los datos de tu vehículo. Esto puede tardar unos segundos.</p>
+<div aria-hidden="true" class="cal-spinner"></div>
+<div class="cal-actions">
+<button class="btn-ghost" id="cal-btn-cancel">Cancelar</button>
 </div>
-
+<div class="cal-iframe-wrap" id="cal-iframe-wrap"></div>
+</div>
+</div>
 <div class="nav">
 <div class="wrap nav-inner">
 <div class="brand">
@@ -608,9 +761,8 @@
 <div class="wrap grid" style="">
 <div class="col-8" style="margin-left:120px;width:100%;max-width:none">
 <h1>ESPECIALISTAS EN DIAGNÓSTICO Y REPARACIÓN DE FALLAS AUTOMOTRICES</h1>
-<p class="amx-subhook">“SI la falla de tu vehiculo te trajo hasta aqui<br>Es porque necesitas una evaluación profesional antes de seguir gastando mas tiempo y dinero”</p>
+<p class="amx-subhook">“SI la falla de tu vehiculo te trajo hasta aqui<br/>Es porque necesitas una evaluación profesional antes de seguir gastando mas tiempo y dinero”</p>
 <div class="wrap" style="margin-bottom:10px"><h2 style="text-align:center; margin-bottom:20px; font-weight:700;">Marcas que atendemos</h2><div class="brands-list"><span style="">Honda</span><span style="">Toyota</span><span style="">Nissan</span><span style="">Mitsubishi</span><span style="">Kia</span><span style="">Hyundai</span><span style="">Mazda</span><span style="">Jeep</span><span style="">Dodge</span><span style="">Chevrolet</span><span style="">Ford</span></div></div>
-
 <p class="amx-commitment">Nuestro compromiso es ayudarte a determinar qué está fallando.<br/>
 Para lograrlo aplicamos procesos técnicos avanzados que definen el camino correcto.<br/>
 </p>
@@ -636,7 +788,6 @@ Para lograrlo aplicamos procesos técnicos avanzados que definen el camino corre
     Tanto las evaluaciones complementarias como las reparaciones se cotizan de manera independiente previa autorización del cliente.
   </div>
 </ul>
-
 </div>
 <p></p>
 </div>
@@ -645,41 +796,54 @@ Para lograrlo aplicamos procesos técnicos avanzados que definen el camino corre
 <section class="section" id="oferta">
 <div class="wrap grid">
 <div class="col-12">
-
-
 <!-- BLOQUE MARCAS (colocado arriba de la oferta) -->
+<div class="wrap consult-cta">
+<div class="card" style="text-align:center">
+<div style="margin-top:10px; text-align:center">
+<p class="muted"><i>¿Tienes alguna duda?</i></p>
+<p class="muted"><i>¿Necesitas asesoría?</i></p>
+<p class="muted">Agenda <b>GRATIS</b> una consulta técnica. Envíanos los datos y te ayudamos.</p>
+<a aria-label="Consultar con un técnico" class="ready btn cta" data-open-form="" href="#" style="background-color:#25D366;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;color:#fff;font-weight:600;text-decoration:none;"> Consultar con un técnico</a></div>
+</div>
+</div>
 
+<div aria-hidden="true" class="spot-glow-wrap"><div class="spot-glow"></div></div><div aria-label="Reserva en línea – prioridad diaria" class="spot-premium-wrap" role="region">
+<div class="spot-premium">
+<div class="row">
+
+<div>
+<div class="exclusivo-prioridad exclusivo-prioridad--center"><span class="badge prioridad">PRIORIDAD</span></div>
+<h3 class="spot-title">Agenda en línea y asegura tu lugar primero</h3>
+<p class="spot-text">
+          Los clientes que reservan por la web reciben <strong>prioridad de cupo</strong> en la agenda diaria.
+          Para que <strong>tu diagnóstico no se quede esperando</strong>.
+        </p>
+<div class="spot-note">⏱️ Reserva en menos de 1 minuto.</div>
+<div aria-label="Sin pago por adelantado" class="spot-guarantee">
+
+<span>Sin pago por adelantado — <strong>solo reserva y listo</strong>.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="card offer-am" style="width:50%;margin:0 auto;box-sizing:border-box">
 <div style="display:flex;align-items:center;gap:12px;margin-left:24px;justify-content:space-between;margin-bottom:16px">
 <span class="pill-am">Exclusivo en línea</span>
 <div class="timer-am" style=";font-size:1.1rem;font-weight:700;margin-left:8px"><span id="amTimer">20:00</span> min</div>
-
-
 </div>
 <h2 style="margin:8px 0 6px;margin-left:24px;text-align:center"><span>Reserva tu Cupo HOY y obtén DESCUENTO</span><br/><span style="font-weight:400;font-size:0.95em">en tu primera revisión</span></h2><div style="display:flex;align-items:flex-end;gap:10px;justify-content:center;margin-left:0;margin:18px 0 10px 0"><p class="muted-light" style="margin:0;text-align:center">Precio regular <span style="text-decoration:line-through;opacity:.85;font-weight:700;font-size:2.2rem;text-decoration-thickness:2.5px">US$85.00</span></p><p class="muted-light" style="margin:0;font-size:1.6rem;font-weight:800"><span style="font-weight:800;color:#fff;font-size:1.35rem"><span style="font-size:2rem;font-weight:900;">HOY</span> <span style="font-size:1.1rem">US$</span><span style="font-size:1.9rem;font-weight:800;line-height:1">49</span><span style="font-size:1.1rem">.00</span></span></p></div>
-<div style="display:block;margin-top:12px;text-align:center"><a class="oferta-btn" data-open-form="" href="#" style="margin-top:4px;display:inline-flex;justify-content:center;align-items:center;margin:8px auto 0 auto" data-calendly="1">
-<img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" style="width:20px;height:20px;"/>
+<div style="display:block;margin-top:12px;text-align:center"><a class="oferta-btn" data-calendly="1" data-open-form="" href="#" style="margin-top:4px;display:inline-flex;justify-content:center;align-items:center;margin:8px auto 0 auto">
+
 <span>Agendar Revisión Ahora</span>
-</a><div class="muted-light" style="font-size:.85rem;margin-bottom:8px;text-align:center;margin-top:10px">Válido únicamente al reservar desde esta página.<br><span style=\"font-size:0.9rem;font-weight:600;color:#fff;\">RESTRICCIONES APLICAN</span></div></div>
+</a><div class="muted-light" style="font-size:.85rem;margin-bottom:8px;text-align:center;margin-top:10px">Válido únicamente al reservar desde esta página.<br/><span style='\"font-size:0.9rem;font-weight:600;color:#fff;\"'>RESTRICCIONES APLICAN</span></div></div>
 </div>
 <div class="wrap" style="margin-top:14px;">
-
 </div>
-
 </div>
 </div>
 </section>
 <section class="section" id="consulta">
-<div class="wrap consult-cta">
-<div class="card" style="text-align:center">
-<div style="margin-top:10px; text-align:center">
-<h3>¿Falla difícil de reparar?</h3>
-<p class="muted"><i>¿Tienes alguna duda?</i></p>
-<p class="muted"><i>¿Necesitas asesoría?</i></p>
-<p class="muted">Agenda <b>GRATIS</b> una consulta técnica. Envíanos los datos y te ayudamos.</p>
-<a aria-label="Consultar con un técnico" class="ready btn cta" data-open-form="" href="#" style="background-color:#25D366;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;color:#fff;font-weight:600;text-decoration:none;"><img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" style="width:20px;height:20px;"/> Consultar con un técnico</a></div>
-</div>
-</div>
 </section>
 <section class="section" id="servicios">
 <div class="services-grid-4 wrap grid" style="margin-top:0">
@@ -909,7 +1073,7 @@ window.open(url, '_blank');});
 })();
 </script>
 <!-- ===== Modal ligero para atajo a Formulario (solo 3 tarjetas) ===== -->
-<div class="modal-am" id="modalDiagnostico"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Diagnóstico avanzado</h2><p>Nuestro trabajo es detectar el origen real de las fallas en sistemas eléctricos y electrónicos utilizando Equipo, laboratorios y herramientas de última generación. Nuestro objetivo: evitar cambios innecesarios de piezas y darte un diagnóstico certero.</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="diagnostico" href="#" onclick="document.getElementById('modalDiagnostico').style.display='none'"><img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" style="width:18px;height:18px;"/> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalDiagnostico').style.display='none'" type="button">Cancelar</button></div></div></div><script>
+<div class="modal-am" id="modalDiagnostico"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Diagnóstico avanzado</h2><p>Nuestro trabajo es detectar el origen real de las fallas en sistemas eléctricos y electrónicos utilizando Equipo, laboratorios y herramientas de última generación. Nuestro objetivo: evitar cambios innecesarios de piezas y darte un diagnóstico certero.</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="diagnostico" href="#" onclick="document.getElementById('modalDiagnostico').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalDiagnostico').style.display='none'" type="button">Cancelar</button></div></div></div><script>
 (function(){
   var grid = document.querySelector('.services-grid-4.wrap.grid');
   if(!grid) return;
@@ -928,7 +1092,7 @@ window.open(url, '_blank');});
     });
   }
 })();
-</script><div class="modal-am" id="modalProgramacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Programación y adaptaciones</h2><p>Hacemos Programación y reaprendizaje de módulos, llaves e inmovilizadores etc, en Ford y Chevrolet, contamos con soporte para marcas como Nissan, Toyota, Hyundai, Kia, Honda, Mazda, Jeep y Dodge (según modelo). Adaptamos unidades nuevas o usadas (Solicitar disponibilidad).</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="programacion" href="#" onclick="document.getElementById('modalProgramacion').style.display='none'"><img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" style="width:18px;height:18px;"/> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalProgramacion').style.display='none'" type="button">Cancelar</button></div></div></div><div class="modal-am" id="modalReparacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Reparación experta</h2><p>Reparamos fallas complejas en electrónica automotriz: módulos, cableado, Redes y sistemas eléctricos; trabajamos únicamente en intervenciones que requieren experiencia avanzada No realizamos servicios Express de ningun tipo.</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="reparacion experta" href="#" onclick="document.getElementById('modalReparacion').style.display='none'"><img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" style="width:18px;height:18px;"/> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalReparacion').style.display='none'" type="button">Cancelar</button></div></div></div><script>
+</script><div class="modal-am" id="modalProgramacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Programación y adaptaciones</h2><p>Hacemos Programación y reaprendizaje de módulos, llaves e inmovilizadores etc, en Ford y Chevrolet, contamos con soporte para marcas como Nissan, Toyota, Hyundai, Kia, Honda, Mazda, Jeep y Dodge (según modelo). Adaptamos unidades nuevas o usadas (Solicitar disponibilidad).</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="programacion" href="#" onclick="document.getElementById('modalProgramacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalProgramacion').style.display='none'" type="button">Cancelar</button></div></div></div><div class="modal-am" id="modalReparacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Reparación experta</h2><p>Reparamos fallas complejas en electrónica automotriz: módulos, cableado, Redes y sistemas eléctricos; trabajamos únicamente en intervenciones que requieren experiencia avanzada No realizamos servicios Express de ningun tipo.</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="reparacion experta" href="#" onclick="document.getElementById('modalReparacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalReparacion').style.display='none'" type="button">Cancelar</button></div></div></div><script>
 (function(){
   var grid = document.querySelector('.services-grid-4.wrap.grid');
   if(!grid) return;
@@ -959,7 +1123,6 @@ window.open(url, '_blank');});
   });
 })();
 </script><script src="https://assets.calendly.com/assets/external/widget.js"></script>
-
 <script>
 (function(){
   if (window.__am_calendly_hook_v12__) return; window.__am_calendly_hook_v12__ = true;
@@ -1173,6 +1336,5 @@ window.open(url, '_blank');});
   });
 })();
 </script>
-
 </body>
 </html>
