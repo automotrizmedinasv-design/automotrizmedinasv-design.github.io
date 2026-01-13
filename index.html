@@ -148,7 +148,7 @@
   border-radius: 8px;
   font-size: 0.95rem;
   color: #111827;
-  line-height: 1.4;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -240,6 +240,20 @@
 
 .modal-am .content h3 {
   color: #0056b3 !important; /* azul */
+}
+
+.prioridad-cta{margin-top:12px;display:flex;justify-content:center;}
+.prioridad-cta .oferta-btn{margin:0;}
+</style>
+<style id="am-hero-tighten-style">
+/* Ajuste de espacio superior del bloque principal (sin tocar el resto de la página) */
+.hero{
+  padding-top: 28px !important;
+}
+@media (max-width: 480px){
+  .hero{
+    padding-top: 18px !important;
+  }
 }
 </style>
 <style>
@@ -652,8 +666,6 @@
   .spot-guarantee{ font-size: 13px; }
 }
 </style>
-
-
 <style id="spot-glow-style">
 /* ===== Glow direccional para guiar la mirada al spot ===== */
 .spot-glow-wrap{
@@ -736,7 +748,1602 @@
   box-shadow:0 0 0 2px rgba(204,0,20,.15) inset
 }
 </style>
-</head>
+<style id="am-prioridad-fix">
+/* Fix layout: PRIORIDAD arriba, botón abajo */
+.prioridad-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.prioridad-badge{
+  display:inline-block;
+  font-size:1.25rem;
+  padding:12px 22px;
+  border-radius:999px;
+}
+/* Botón más pequeño dentro del bloque de prioridad */
+.prioridad-wrap .oferta-btn{
+  font-size:0.95rem;
+  padding:10px 18px;
+  border-radius:14px;
+}
+</style>
+<style id="am-reserva-bottom-fix">
+  .am-reserva-btn-bottom{ margin-top: 18px; display:flex; justify-content:center; }
+  /* Give the whole reserva/prioridad card a bit more bottom padding so it doesn't feel cramped */
+  .reserva-card, .prioridad-card, .am-reserva-card{ padding-bottom: 28px !important; }
+</style>
+<style id="am-reserva-cta-bottom">
+  .am-reserva-btn-bottom{ margin-top: 16px; display:flex; justify-content:center; }
+  .am-reserva-btn-bottom .prioridad-cta{ margin:0 !important; }
+  /* make sure the premium card grows comfortably */
+  .spot-premium{ padding-bottom: 30px !important; }
+  /* make the button a bit smaller as requested */
+  .am-reserva-btn-bottom .oferta-btn{ font-size: 1rem !important; padding: 10px 18px !important; }
+</style>
+<style id="am-service-cards-fix">
+  /* Evitar quiebres absurdos del texto en las tarjetas */
+  .service-card h3,
+  .service-card .title,
+  .services-grid-4 h3,
+  .services-grid-4 .service-title{
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: manual !important;
+    line-height: 1.15;
+  }
+
+  /* Darles más "cuerpo" para que no se vean comprimidas */
+  .services-grid-4{
+    gap: 26px !important;
+  }
+  .service-card,
+  .services-grid-4 .card,
+  .services-grid-4 > div{
+    min-height: 140px;
+  }
+  .service-card{
+    padding: 34px 26px !important;
+    border-radius: 22px !important;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Efecto extra en móvil (tap) sin romper hover */
+  .service-card:active{
+    transform: translateY(1px) scale(0.985);
+    box-shadow: 0 16px 34px rgba(0,0,0,.14) !important;
+  }
+
+  /* Mejora de accesibilidad/feedback en touch */
+  @media (hover: none){
+    .service-card{
+      box-shadow: 0 12px 28px rgba(0,0,0,.10);
+    }
+    .service-card:active{
+      box-shadow: 0 18px 38px rgba(0,0,0,.18);
+    }
+  }
+
+  /* Tamaño de títulos acorde */
+  .service-card h3{
+    font-size: clamp(1.35rem, 2.6vw, 2.05rem);
+    font-weight: 800;
+  }
+</style>
+<style id="am-service-touch-affordance-strong">
+  .service-card{
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    border: 2px solid rgba(11, 62, 168, 0.18) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.12) !important;
+    background: linear-gradient(180deg, rgba(11,62,168,0.035), rgba(34,197,94,0.02));
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+  }
+  .service-card:hover{
+    border-color: rgba(11, 62, 168, 0.32) !important;
+    filter: brightness(1.01);
+  }
+
+  /* Hint visible SOLO en móvil/touch */
+  .am-tap-hint{
+    display: none;
+    position: absolute;
+    right: 16px;
+    bottom: 14px;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: .2px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(11, 62, 168, 0.12);
+    border: 1px solid rgba(11, 62, 168, 0.26);
+    color: rgba(11, 62, 168, 0.95);
+    box-shadow: 0 10px 22px rgba(0,0,0,.10);
+    pointer-events: none;
+  }
+
+  @media (hover: none){
+    .am-tap-hint{ display: inline-flex; }
+    .service-card:active{
+      transform: translateY(2px) scale(0.985);
+      border-color: rgba(34, 197, 94, 0.60) !important;
+      box-shadow: 0 24px 52px rgba(0,0,0,.18) !important;
+    }
+    .service-card:active .am-tap-hint{
+      background: rgba(34, 197, 94, 0.16);
+      border-color: rgba(34, 197, 94, 0.38);
+      color: rgba(17, 24, 39, 0.88);
+    }
+  }
+</style>
+<style id="am-service-relief-v1">
+  /* === Relieve tipo botón para tarjetas de servicio (más "clickeable") === */
+  .service-card{
+    background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 100%) !important;
+    border: 2px solid rgba(13,71,161,.22) !important;
+    box-shadow:
+      0 14px 28px rgba(0,0,0,.14),
+      0 2px 0 rgba(13,71,161,.10),
+      inset 0 1px 0 rgba(255,255,255,.95),
+      inset 0 -10px 18px rgba(13,71,161,.06) !important;
+    transform: translateY(0);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+  }
+
+  .service-card:hover{
+    border-color: rgba(13,71,161,.32) !important;
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 34px rgba(0,0,0,.16),
+      0 3px 0 rgba(13,71,161,.12),
+      inset 0 1px 0 rgba(255,255,255,.96),
+      inset 0 -12px 20px rgba(13,71,161,.07) !important;
+    filter: brightness(1.01);
+  }
+
+  /* Feedback táctil: "presionado" */
+  .service-card:active{
+    transform: translateY(2px) scale(0.99);
+    box-shadow:
+      0 10px 22px rgba(0,0,0,.14),
+      0 1px 0 rgba(13,71,161,.08),
+      inset 0 2px 8px rgba(0,0,0,.10),
+      inset 0 -6px 12px rgba(13,71,161,.05) !important;
+  }
+
+  @media (hover: none){
+    .service-card{ box-shadow:
+      0 16px 34px rgba(0,0,0,.15),
+      0 3px 0 rgba(13,71,161,.12),
+      inset 0 1px 0 rgba(255,255,255,.96),
+      inset 0 -12px 20px rgba(13,71,161,.07) !important; }
+  }
+</style>
+<style id="am-color-fix-v2">
+/* === Ajustes solicitados (sobre la versión correcta) === */
+
+/* 1) Títulos de servicios en NEGRO */
+.services-grid-4 .card.service-box h2,
+.services-grid-4 .service-box h2{
+  color: #111827 !important;
+}
+
+/* 2) Botón "Reservar Ahora" en AZUL */
+a.oferta-btn{
+  background:#2563EB !important;
+  border-color:#2563EB !important;
+  color:#fff !important;
+}
+a.oferta-btn:hover{
+  background:#1E4FCF !important;
+  border-color:#1E4FCF !important;
+}
+/* Feedback táctil en móviles */
+@media (hover:none){
+  a.oferta-btn:active{
+    transform: translateY(1px) scale(0.99);
+    filter: brightness(0.98);
+  }
+}
+</style>
+<style id="am-consult-wa-style">
+  .am-wa-ico{ display:inline-flex; align-items:center; justify-content:center; }
+  .am-wa-ico svg{ display:block; }
+  .am-consult-btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; }
+  /* Ensure icon inherits button text color */
+  .am-consult-btn .am-wa-ico{ color: inherit; }
+</style>
+<style id="am-wa-button-polish">
+  .am-consult-btn{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:12px !important;
+    font-weight:800;
+  }
+  .am-consult-btn .am-wa-ico{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .am-consult-btn svg{
+    display:block;
+  }
+</style>
+<style id="am-descuento-style">
+  .am-descuento-linea{
+    margin: 10px 0 6px;
+    text-align: center;
+  }
+  .am-descuento-linea strong{
+    font-size: 1.05rem;
+    color: #111827;
+  }
+  .am-descuento-destacado{
+    color: #cc0014;
+    font-weight: 900;
+  }
+</style>
+<style id="am-call-float-style">
+  /* ===== Botón flotante "Llamar" (alto CTA, visible y convincente) ===== */
+  .am-call-float-wrap{
+    position: fixed;
+    right: 16px;
+    bottom: 18px;
+    z-index: 80; /* por encima de casi todo */
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    pointer-events: none; /* solo el botón recibe clic */
+  }
+  .am-call-float{
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: #2563EB; /* azul */
+    color: #ffffff;
+    box-shadow: 0 14px 34px rgba(0,0,0,.28);
+    border: 2px solid rgba(255,255,255,.22);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration:none;
+  }
+  .am-call-float:hover{
+    background:#1E4FCF;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(0,0,0,.34);
+  }
+  /* “Pulso” sutil para invitar a llamar */
+  @media (prefers-reduced-motion:no-preference){
+    .am-call-float::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius:999px;
+      border: 2px solid rgba(37,99,235,.35);
+      animation: amCallPulse 1.9s ease-out infinite;
+    }
+    @keyframes amCallPulse{
+      0%   { transform: scale(.85); opacity: .85; }
+      70%  { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+  }
+  /* Etiqueta */
+  .am-call-label{
+    pointer-events: none;
+    background: rgba(15, 23, 42, .92);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    letter-spacing: .2px;
+  }
+  /* En móvil: mostrar etiqueta siempre (convierte más) */
+  @media (hover:none){
+    .am-call-label{ display:inline-flex; }
+    .am-call-float:active{
+      transform: scale(0.96);
+      box-shadow: 0 16px 38px rgba(0,0,0,.38);
+    }
+  }
+</style>
+<style id="am-modal-mobile-fix-v1">
+/* ===== Fix MODALES en móvil: nada se sale del borde ===== */
+
+/* Overlay con padding para que el modal no pegue a los bordes */
+.modal-am{
+  padding: 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* Caja del modal: ancho seguro + box sizing */
+.modal-am .content{
+  width: min(520px, 100%) !important;   /* nunca más ancho que la pantalla */
+  max-width: 100% !important;
+  margin: 8vh auto 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;         /* evita desbordes por sombras o elementos internos */
+}
+
+/* Contenido interno no debe desbordar */
+.modal-am .content *{
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Botones: que se adapten y no "exploten" el ancho */
+.modal-am .actions{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  justify-content: center !important;
+}
+
+.modal-am .btn-primary,
+.modal-am .btn-secondary{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 100% !important;
+  white-space: normal !important;      /* permite salto si el texto es largo */
+  text-align: center !important;
+}
+
+/* En pantallas pequeñas: botones full-width */
+@media (max-width: 480px){
+  .modal-am .content{
+    width: 100% !important;
+    margin: 6vh auto 0 !important;
+    padding: 16px !important;
+    border-radius: 14px !important;
+  }
+  .modal-am .btn-primary,
+  .modal-am .btn-secondary{
+    width: 100% !important;
+  }
+}
+</style>
+<style id="am-consult-btn-mobile-fix">
+  /* ===== Fix: Botón "Consultar con un técnico" centrado y proporcional en móvil ===== */
+  .consult-cta,
+  .consult-card,
+  .am-consult-section{
+    overflow: hidden; /* evita que sombras/desbordes muevan el layout */
+  }
+
+  a.am-consult-btn{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 420px;
+  }
+
+  @media (max-width: 520px){
+    a.am-consult-btn{
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 14px auto 0 !important;
+      padding: 16px 14px !important;
+      border-radius: 14px !important;
+      box-sizing: border-box !important;
+    }
+    /* Asegurar que el contenido interno no empuje el botón */
+    a.am-consult-btn .am-wa-ico,
+    a.am-consult-btn svg{
+      flex: 0 0 auto;
+    }
+    /* Si el texto es largo, que haga salto y quede centrado */
+    a.am-consult-btn span{
+      white-space: normal !important;
+      text-align: center !important;
+      line-height: 1.15 !important;
+    }
+  }
+</style>
+<style id="am-services-as-buttons">
+/* ===== Servicios como BOTONES reales ===== */
+.services-grid-4 .service-box,
+.services-grid-4 .service-card,
+.services-grid-4 .card{
+  cursor: pointer;
+  user-select: none;
+  border-radius: 18px !important;
+  border: 2px solid #0d47a1 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 10px 26px rgba(13,71,161,.18) !important;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    border-color .18s ease;
+}
+
+/* Hover (desktop) */
+.services-grid-4 .service-box:hover,
+.services-grid-4 .service-card:hover,
+.services-grid-4 .card:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 16px 34px rgba(13,71,161,.28) !important;
+  border-color: #2563EB !important;
+}
+
+/* Active / Tap (mobile) */
+@media (hover: none){
+  .services-grid-4 .service-box:active,
+  .services-grid-4 .service-card:active,
+  .services-grid-4 .card:active{
+    transform: translateY(1px) scale(0.98);
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,.12),
+      0 8px 18px rgba(0,0,0,.22) !important;
+    background: linear-gradient(180deg, #e9f1ff 0%, #ffffff 100%) !important;
+    border-color: #2563EB !important;
+  }
+}
+
+/* Títulos centrados y con peso de botón */
+.services-grid-4 h2,
+.services-grid-4 h3{
+  text-align: center !important;
+  font-weight: 900 !important;
+}
+
+/* Indicador visual de acción (solo móvil) */
+.am-btn-hint{
+  display: none;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #2563EB;
+}
+
+@media (hover:none){
+  .am-btn-hint{
+    display: block;
+    text-align: center;
+  }
+}
+</style>
+<style id="am-title-no-border-and-buttons-motion">
+  /* ===== Quitar borde del título "¿QUÉ TIPO DE SERVICIO NECESITAS?" ===== */
+  .am-service-question h2{
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ===== Botones de servicios: más sombra + efecto movimiento ===== */
+  .services-grid-4 .service-box,
+  .services-grid-4 .service-card,
+  .services-grid-4 .card{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.95),
+      0 14px 34px rgba(13,71,161,.22) !important;
+    transition:
+      transform .22s ease,
+      box-shadow .22s ease,
+      background .22s ease,
+      border-color .22s ease;
+  }
+
+  /* Movimiento sutil tipo "flotar" en hover (desktop) */
+  .services-grid-4 .service-box:hover,
+  .services-grid-4 .service-card:hover,
+  .services-grid-4 .card:hover{
+    transform: translateY(-4px) scale(1.01);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.98),
+      0 20px 44px rgba(13,71,161,.30) !important;
+  }
+
+  /* En móvil: sensación de "botón vivo" al tocar */
+  @media (hover:none){
+    .services-grid-4 .service-box:active,
+    .services-grid-4 .service-card:active,
+    .services-grid-4 .card:active{
+      transform: translateY(2px) scale(0.97);
+      box-shadow:
+        inset 0 2px 6px rgba(0,0,0,.16),
+        0 10px 22px rgba(0,0,0,.22) !important;
+    }
+  }
+</style>
+<style disabled="" id="am-services-priority-motion">
+/* ===== Movimiento continuo tipo PRIORIDAD ===== */
+@keyframes amFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.services-grid-4 .service-box,
+.services-grid-4 .service-card,
+.services-grid-4 .card{
+  animation: amFloat 3.2s ease-in-out infinite;
+}
+
+/* Desfase para que no se muevan iguales */
+.services-grid-4 .service-box:nth-child(2),
+.services-grid-4 .service-card:nth-child(2),
+.services-grid-4 .card:nth-child(2){
+  animation-delay: .4s;
+}
+.services-grid-4 .service-box:nth-child(3),
+.services-grid-4 .service-card:nth-child(3),
+.services-grid-4 .card:nth-child(3){
+  animation-delay: .8s;
+}
+
+/* En hover: pausa animación y eleva */
+.services-grid-4 .service-box:hover,
+.services-grid-4 .service-card:hover,
+.services-grid-4 .card:hover{
+  animation-play-state: paused;
+  transform: translateY(-8px) scale(1.02);
+}
+</style>
+<style disabled="" id="am-services-pulse-motion">
+/* ===== Movimiento tipo PALPITACIÓN (heartbeat) ===== */
+@keyframes amPulse {
+  0%   { transform: scale(1); box-shadow: 0 14px 34px rgba(13,71,161,.22); }
+  35%  { transform: scale(1.035); box-shadow: 0 22px 46px rgba(13,71,161,.35); }
+  70%  { transform: scale(1); box-shadow: 0 14px 34px rgba(13,71,161,.22); }
+  100% { transform: scale(1); box-shadow: 0 14px 34px rgba(13,71,161,.22); }
+}
+
+.services-grid-4 .service-box,
+.services-grid-4 .service-card,
+.services-grid-4 .card{
+  animation: amPulse 2.6s ease-in-out infinite;
+}
+
+/* Desfase para que no palpite todo al mismo tiempo */
+.services-grid-4 .service-box:nth-child(2),
+.services-grid-4 .service-card:nth-child(2),
+.services-grid-4 .card:nth-child(2){
+  animation-delay: .35s;
+}
+.services-grid-4 .service-box:nth-child(3),
+.services-grid-4 .service-card:nth-child(3),
+.services-grid-4 .card:nth-child(3){
+  animation-delay: .7s;
+}
+
+/* Hover / toque: pausa y eleva */
+.services-grid-4 .service-box:hover,
+.services-grid-4 .service-card:hover,
+.services-grid-4 .card:hover{
+  animation-play-state: paused;
+  transform: scale(1.06);
+  box-shadow: 0 26px 54px rgba(13,71,161,.38);
+}
+</style>
+<style disabled="" id="am-services-pulse-motion-v2">
+/* ===== Palpitación MÁS RÁPIDA y DESINCRONIZADA ===== */
+@keyframes amPulseFast {
+  0%   { transform: scale(1); box-shadow: 0 14px 30px rgba(13,71,161,.22); }
+  30%  { transform: scale(1.045); box-shadow: 0 24px 48px rgba(13,71,161,.38); }
+  55%  { transform: scale(1); box-shadow: 0 14px 30px rgba(13,71,161,.22); }
+  100% { transform: scale(1); box-shadow: 0 14px 30px rgba(13,71,161,.22); }
+}
+
+.services-grid-4 .service-box,
+.services-grid-4 .service-card,
+.services-grid-4 .card{
+  animation-name: amPulseFast;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Ritmos distintos */
+.services-grid-4 .service-box:nth-child(1){ animation-duration: 1.4s; }
+.services-grid-4 .service-box:nth-child(2){ animation-duration: 1.9s; }
+.services-grid-4 .service-box:nth-child(3){ animation-duration: 1.6s; }
+
+.services-grid-4 .service-card:nth-child(1){ animation-duration: 1.4s; }
+.services-grid-4 .service-card:nth-child(2){ animation-duration: 1.9s; }
+.services-grid-4 .service-card:nth-child(3){ animation-duration: 1.6s; }
+
+.services-grid-4 .card:nth-child(1){ animation-duration: 1.4s; }
+.services-grid-4 .card:nth-child(2){ animation-duration: 1.9s; }
+.services-grid-4 .card:nth-child(3){ animation-duration: 1.6s; }
+
+/* Hover / toque: pausa */
+.services-grid-4 .service-box:hover,
+.services-grid-4 .service-card:hover,
+.services-grid-4 .card:hover{
+  animation-play-state: paused;
+  transform: scale(1.06);
+  box-shadow: 0 28px 56px rgba(13,71,161,.42);
+}
+</style>
+<style id="am-services-zoom-motion">
+/* ===== Movimiento "se acerca / se aleja" (zoom suave) ===== */
+@keyframes amZoomBreath {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.services-grid-4 .service-box,
+.services-grid-4 .service-card,
+.services-grid-4 .card{
+  animation-name: amZoomBreath;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  /* sombra estable (no “latido”) para que se sienta zoom, no palpitación */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 14px 34px rgba(13,71,161,.22) !important;
+}
+
+/* Ritmos distintos (desincronizado) */
+.services-grid-4 .service-box:nth-child(1){ animation-duration: 2.2s; }
+.services-grid-4 .service-box:nth-child(2){ animation-duration: 2.9s; }
+.services-grid-4 .service-box:nth-child(3){ animation-duration: 2.5s; }
+
+.services-grid-4 .service-card:nth-child(1){ animation-duration: 2.2s; }
+.services-grid-4 .service-card:nth-child(2){ animation-duration: 2.9s; }
+.services-grid-4 .service-card:nth-child(3){ animation-duration: 2.5s; }
+
+.services-grid-4 .card:nth-child(1){ animation-duration: 2.2s; }
+.services-grid-4 .card:nth-child(2){ animation-duration: 2.9s; }
+.services-grid-4 .card:nth-child(3){ animation-duration: 2.5s; }
+
+/* Hover / toque: pausa y “acerca” más (confirmación de clic) */
+.services-grid-4 .service-box:hover,
+.services-grid-4 .service-card:hover,
+.services-grid-4 .card:hover{
+  animation-play-state: paused;
+  transform: scale(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 22px 48px rgba(13,71,161,.30) !important;
+}
+
+@media (hover:none){
+  .services-grid-4 .service-box:active,
+  .services-grid-4 .service-card:active,
+  .services-grid-4 .card:active{
+    animation-play-state: paused;
+    transform: scale(0.98);
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,.16),
+      0 10px 22px rgba(0,0,0,.22) !important;
+  }
+}
+</style>
+<style id="am-services-mobile-compact">
+/* ===== Compactar tarjetas/botones de servicios en MÓVIL (menos espacio vacío) ===== */
+@media (max-width: 520px){
+  .services-grid-4{
+    gap: 14px !important;
+  }
+
+  /* Reduce alto/padding interno */
+  .services-grid-4 .service-box,
+  .services-grid-4 .service-card,
+  .services-grid-4 .card{
+    padding: 18px 14px !important;
+    min-height: 120px !important;  /* evita bloques gigantes */
+    height: auto !important;
+  }
+
+  /* Título: tamaño y espaciado más compacto */
+  .services-grid-4 h2,
+  .services-grid-4 h3{
+    font-size: 1.55rem !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+  }
+
+  /* Si hay párrafos/descripcion dentro, compactarlos */
+  .services-grid-4 p{
+    margin-top: 10px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+/* Extra: teléfonos pequeños */
+@media (max-width: 380px){
+  .services-grid-4 .service-box,
+  .services-grid-4 .service-card,
+  .services-grid-4 .card{
+    padding: 16px 12px !important;
+    min-height: 110px !important;
+  }
+  .services-grid-4 h2,
+  .services-grid-4 h3{
+    font-size: 1.45rem !important;
+  }
+}
+</style>
+<style id="am-services-mobile-tight-v2">
+/* ===== MÓVIL: que el recuadro se ajuste al texto (sin “caja gigante”) ===== */
+@media (max-width: 520px){
+  .services-grid-4{
+    gap: 12px !important;           /* separa un poquito cada cuadrito */
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  /* El contenedor del botón/tarjeta se adapta al contenido */
+  .services-grid-4 .service-box,
+  .services-grid-4 .service-card,
+  .services-grid-4 .card{
+    height: auto !important;
+    min-height: 0 !important;       /* mata cualquier min-height previo */
+    padding: 14px 12px !important;  /* menos “aire” */
+    border-radius: 22px !important; /* reborde más elegante */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Título: compacto y centrado */
+  .services-grid-4 h2,
+  .services-grid-4 h3{
+    font-size: 1.45rem !important;
+    line-height: 1.12 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Si existe texto extra dentro, que no inflen la caja */
+  .services-grid-4 p{
+    margin: 8px 0 0 !important;
+    line-height: 1.35 !important;
+  }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 380px){
+  .services-grid-4{
+    gap: 10px !important;
+  }
+  .services-grid-4 .service-box,
+  .services-grid-4 .service-card,
+  .services-grid-4 .card{
+    padding: 12px 10px !important;
+    border-radius: 20px !important;
+  }
+  .services-grid-4 h2,
+  .services-grid-4 h3{
+    font-size: 1.35rem !important;
+  }
+}
+</style>
+<style id="am-call-float-label-below">
+  /* ===== Botón flotante: texto DEBAJO del icono ===== */
+  .am-call-float-wrap{
+    align-items: center !important;
+  }
+
+  .am-call-label{
+    order: 2 !important;
+    margin-top: 6px !important;
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  .am-call-float{
+    order: 1 !important;
+  }
+</style>
+<style id="am-call-float-non-intrusive">
+  /* ===== Botón de llamada NO intrusivo ===== */
+  .am-call-float-wrap{
+    right: 14px !important;
+    bottom: 14px !important;
+  }
+
+  .am-call-float{
+    width: 44px !important;
+    height: 44px !important;
+    box-shadow: 0 10px 22px rgba(0,0,0,.25) !important;
+  }
+
+  .am-call-float svg{
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Texto más discreto */
+  .am-call-label{
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    opacity: .85;
+  }
+
+  /* En móviles pequeños, ocultar texto y dejar solo el icono */
+  @media (max-width: 420px){
+    .am-call-label{
+      display: none !important;
+    }
+  }
+</style>
+<style id="am-call-float-top">
+  /* ===== Botón de llamada en la PARTE SUPERIOR ===== */
+  .am-call-float-wrap{
+    top: 90px !important;   /* debajo del header */
+    bottom: auto !important;
+    right: 14px !important;
+    align-items: center !important;
+  }
+
+  /* Mantener texto visible */
+  .am-call-label{
+    display: inline-flex !important;
+    opacity: .9 !important;
+  }
+</style>
+<style id="am-call-float-bottom-keep-text">
+  /* ===== Botón de llamada: ABAJO y con texto visible ===== */
+  .am-call-float-wrap{
+    top: auto !important;
+    bottom: 16px !important;
+    right: 14px !important;
+    align-items: center !important;
+  }
+  .am-call-label{
+    display: inline-flex !important;
+    opacity: .9 !important;
+  }
+</style>
+<style id="am-consult-btn-bigger">
+  /* ===== Botón Consultar más grande (móvil) ===== */
+  @media (max-width: 520px){
+    a.am-consult-btn{
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 20px 16px !important;
+      border-radius: 18px !important;
+      font-size: 1.25rem !important;
+    }
+    a.am-consult-btn span{
+      font-size: 1.25rem !important;
+      line-height: 1.15 !important;
+    }
+  }
+  /* En pantallas un poco más grandes, que también se vea más ancho */
+  @media (min-width: 521px) and (max-width: 820px){
+    a.am-consult-btn{
+      width: min(520px, 95%) !important;
+      padding: 18px 16px !important;
+      border-radius: 18px !important;
+    }
+  }
+</style>
+<style id="am-consulta-text-big-button-smaller">
+/* ===== Aumentar texto 35% y reducir botón 35% ===== */
+@media (max-width: 520px){
+  .consulta-box h2,
+  .consulta-box h3,
+  .consulta-box p{
+    font-size: 135% !important;
+    line-height: 1.3 !important;
+  }
+
+  .consulta-box{
+    padding: 26px 18px !important;
+  }
+
+  a.am-consult-btn{
+    transform: scale(0.65);
+    transform-origin: center;
+  }
+}
+</style>
+<style id="am-consulta-text-bigger-v2">
+/* ===== Aumentar texto +40% adicional y botón +15% ===== */
+@media (max-width: 520px){
+  .consulta-box h2,
+  .consulta-box h3,
+  .consulta-box p{
+    font-size: 175% !important; /* 135% + ~40% */
+    line-height: 1.25 !important;
+  }
+
+  .consulta-box{
+    padding: 30px 20px !important;
+  }
+
+  a.am-consult-btn{
+    transform: scale(0.75); /* antes 0.65 → +15% aprox */
+    transform-origin: center;
+  }
+}
+</style>
+<style id="am-consult-cta-notable-v3">
+/* ===== Ajuste NOTABLE (móvil): texto grande + botón más presente ===== */
+@media (max-width: 520px){
+  /* Caja de la sección consulta */
+  .consult-cta .card{
+    padding: 26px 18px !important;
+  }
+
+  /* Líneas de texto (¿Tienes dudas? / ¿Necesitas Asesoría?) */
+  .consult-cta p.muted{
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+    margin: 10px 0 !important;
+  }
+
+  /* Línea principal con CONSULTA */
+  .consult-cta p.muted b{
+    font-size: 1.75rem !important;
+    letter-spacing: .3px !important;
+  }
+
+  /* Botón: más grande y ancho (sin escalas raras) */
+  a.am-consult-btn{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 22px 18px !important;
+    border-radius: 18px !important;
+    font-size: 1.35rem !important;
+    /* transform eliminado para permitir animación en móvil */
+  }
+
+  a.am-consult-btn span{
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  /* Ícono alineado y un poco más grande */
+  a.am-consult-btn .am-wa-ico svg{
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+</style>
+<style id="am-consult-wa-fix-v37">
+  /* Botón Consultar con un técnico – palpitación continua */
+  a.am-consult-btn{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+
+    padding: 12px 18px !important;
+    font-size: 1.05rem !important;
+    line-height: 1.1 !important;
+    border-radius: 16px !important;
+
+    /* Palpitación continua */
+    animation: amHeartbeat 1.4s ease-in-out infinite;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  /* Keyframes tipo latido */
+  @keyframes amHeartbeat {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.08); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.08); }
+    70%  { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+
+  /* Hover desktop */
+  a.am-consult-btn:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,.22);
+  }
+
+  /* Tap móvil */
+  a.am-consult-btn:active{
+    transform: scale(0.95);
+    box-shadow: 0 8px 16px rgba(0,0,0,.28);
+    animation: none;
+  }
+
+  a.am-consult-btn .am-consultar-text{
+    font-size: clamp(0.98rem, 3.8vw, 1.12rem) !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+
+  a.am-consult-btn .am-wa-ico svg{
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  @media (max-width: 360px){
+    a.am-consult-btn{
+      max-width: 340px !important;
+      padding: 11px 16px !important;
+      animation-duration: 1.6s;
+    }
+    a.am-consult-btn .am-wa-ico svg{
+      width: 22px !important;
+      height: 22px !important;
+    }
+  }
+</style>
+<style id="am-service-question-style-fix">
+  /* Título distintivo: contraste + tipografía diferente */
+  .am-service-question{
+    text-align:center;
+    margin: 22px 0 18px 0;
+  }
+  .am-service-question h2{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family: "Oswald", "Montserrat", "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 900;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+
+    /* Look Automotriz Medina: limpio + serio */
+    background: #ffffff;
+    border: 2px solid #0d47a1;
+    color: #e53935;
+
+    padding: 10px 20px;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  }
+  .am-service-question h2::before{
+    content:"🔧";
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+</style>
+<style id="am-service-question-icon-top-fix">
+  /* Colocar el icono ARRIBA del texto (sin cambiar colores) */
+  .am-service-question h2{
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    text-align: center !important;
+  }
+  .am-service-question h2::before{
+    display: block !important;
+    margin: 0 0 2px 0 !important;
+    font-size: 1.55rem !important;
+  }
+</style>
+<style id="am-services-spacing-fix">
+  /* Ajuste: subir botones de servicios y reducir separación (móvil) */
+  @media (max-width: 700px){
+    .am-service-question{
+      margin: 18px 0 6px 0 !important; /* menos aire debajo del título rojo */
+    }
+    /* Quitar padding superior de la sección donde están los servicios */
+    #oferta.section{
+      padding-top: 0 !important;
+      margin-top: -6px !important; /* sube la sección hacia el título */
+    }
+    #oferta .services-grid-4{
+      margin-top: -6px !important;
+      gap: 12px !important;       /* menos separación entre botones */
+      row-gap: 12px !important;
+    }
+    /* En móvil, evitar que el botón de llamada tape los servicios */
+    #oferta .card.service-box{
+      width: calc(100% - 86px) !important; /* deja espacio a la derecha */
+      margin: 0 auto !important;
+    }
+    #oferta .card.service-box h2{
+      margin: 16px 0 !important; /* reduce alto interno sin comprimir texto */
+    }
+  }
+</style>
+<style id="am-oferta-btn-mobile-tap-fix">
+/* ===== FIX: Botón "Reservar Ahora" responde al primer toque en móvil ===== */
+a.oferta-btn{
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: none) and (pointer: coarse){
+  /* Evita el comportamiento de "primer toque = hover" en iOS */
+  a.oferta-btn:hover{ background:#25D366; }
+}
+</style>
+<style id="am-tech-segment-polish-v1">
+  /* === Segmento: Soporte técnico (solo .tech-card y sus hijos) === */
+  .tech-card{
+    border-radius: 26px !important;
+    border: 1px solid rgba(13,71,161,.22) !important;
+    background: linear-gradient(180deg, rgba(13,71,161,.06) 0%, rgba(46,125,50,.06) 100%) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.10) !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  .tech-card::before{
+    content:"";
+    position:absolute;
+    inset: 0;
+    background: radial-gradient(600px 220px at 20% 0%, rgba(13,71,161,.10), transparent 55%),
+                radial-gradient(520px 220px at 85% 15%, rgba(46,125,50,.10), transparent 55%);
+    pointer-events:none;
+  }
+  .tech-head{
+    position: relative;
+    padding: 18px 18px 8px 18px !important;
+    text-align: center !important;
+  }
+  .tech-badge{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(0,0,0,.10) !important;
+    background: rgba(255,255,255,.75) !important;
+    font-weight: 800 !important;
+    letter-spacing: .6px !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08) !important;
+  }
+  .tech-title{
+    position: relative;
+    margin: 14px 0 6px 0 !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+    letter-spacing: .2px !important;
+  }
+  .tech-grid{
+    position: relative;
+    padding: 6px 18px 18px 18px !important;
+    gap: 16px !important;
+  }
+
+  .tech-h3{
+    margin: 10px 0 10px 0 !important;
+    font-weight: 900 !important;
+    letter-spacing: .2px !important;
+  }
+
+  /* Lista más “pro” sin tocar el contenido */
+  .tech-col ul{
+    margin: 0 !important;
+    padding-left: 18px !important;
+  }
+  .tech-col li{
+    margin: 10px 0 !important;
+    line-height: 1.35 !important;
+  }
+  .tech-col li::marker{
+    font-size: 1.1em !important;
+  }
+
+  /* CTA: centrado real + look premium */
+  .tech-col-cta{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+  a.tech-btn{
+    width: min(92%, 420px) !important;
+    margin: 14px auto 0 auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+
+    border-radius: 20px !important;
+    border: 1px solid rgba(0,0,0,.08) !important;
+    box-shadow: 0 16px 32px rgba(0,0,0,.14) !important;
+
+    /* Asegura centrado aunque el contenedor tenga padding raro */
+    left: 0 !important;
+    right: 0 !important;
+  }
+  /* Tipografía del botón */
+  .tech-btn-text{
+    font-weight: 900 !important;
+    letter-spacing: .2px !important;
+  }
+  /* Ícono más nítido */
+  .tech-btn-ico{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.18) !important;
+  }
+  /* Interacción clara en móvil */
+  a.tech-btn:active{
+    transform: scale(.98) !important;
+    box-shadow: 0 10px 22px rgba(0,0,0,.16) !important;
+  }
+
+  /* Pequeña “palpitación” sutil para llamar la atención (solo este botón) */
+  @keyframes amTechPulse{
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.015); }
+    100% { transform: scale(1); }
+  }
+  a.tech-btn{
+    animation: amTechPulse 2.2s ease-in-out infinite !important;
+    will-change: transform;
+  }
+
+  /* Ajuste móvil: más aire y centrado garantizado */
+  @media (max-width: 520px){
+    .tech-grid{ padding: 8px 16px 18px 16px !important; }
+    a.tech-btn{ border-radius: 22px !important; }
+  }
+</style>
+<style id="am-reservar-btn-freeze-fix">/* Fix: Reservar Ahora responde al primer toque (sin cambiar el flujo del formulario) */
+a.oferta-btn{
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  z-index: 80; /* por encima de capas decorativas */
+}</style><script id="am-reservar-btn-freeze-fix-js">(function(){
+  function ready(fn){
+    if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', fn); }
+    else { fn(); }
+  }
+
+  ready(function(){
+    var btn = document.querySelector('a.oferta-btn');
+    if(!btn) return;
+
+    // Bloqueo anti doble-tap (muy corto)
+    var last = 0;
+    function trigger(e){
+      try{
+        // Evita que el toque se pierda por navegación a "#"
+        if(e){ e.preventDefault(); e.stopPropagation(); }
+      }catch(_){}
+      var now = Date.now();
+      if(now - last < 350) return;
+      last = now;
+
+      // Si existe openForm (del script original), úsalo directo: más confiable.
+      if(typeof window.openForm === 'function'){
+        window.openForm();
+        return;
+      }
+      // Fallback: dispara el click normal.
+      try{ btn.click(); }catch(_){}
+    }
+
+    // En móvil, a veces el "click" no llega o llega tarde; esto lo asegura.
+    btn.addEventListener('pointerup', trigger, {passive:false});
+    btn.addEventListener('touchend', trigger, {passive:false});
+    btn.addEventListener('click', function(e){
+      // Mantén el comportamiento original, pero evita el salto a "#"
+      if(btn.getAttribute('href') === '#'){
+        e.preventDefault();
+      }
+    }, {passive:false});
+  });
+})();</script><style id="am-brand-click-style">/* Marcas: chips clickeables */
+.brands-list span{
+  cursor:pointer;
+  user-select:none;
+  -webkit-user-select:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, border-color .12s ease;
+}
+.brands-list span:active{
+  transform: scale(0.97);
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+  background-color: rgba(37,211,102,.08);
+  border-color: rgba(37,211,102,.35);
+}</style><style id="am-brand-confirm-style">/* Dialogo confirmación de marca */
+#amBrandConfirmOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+#amBrandConfirmOverlay.show{ display: flex; }
+#amBrandConfirmBox{
+  width: min(520px, 96vw);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  border: 1px solid rgba(0,0,0,.06);
+  overflow: hidden;
+}
+#amBrandConfirmHeader{
+  padding: 16px 18px 10px 18px;
+  background: linear-gradient(135deg, rgba(37,211,102,.10), rgba(28,117,255,.08));
+}
+#amBrandConfirmTitle{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: .2px;
+}
+#amBrandConfirmSub{
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.35;
+}
+#amBrandConfirmBrand{
+  font-weight: 800;
+  color: #0b5bd3;
+}
+#amBrandConfirmActions{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 14px 18px 18px 18px;
+}
+.amBrandBtn{
+  border: 0;
+  border-radius: 14px;
+  padding: 11px 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  user-select: none;
+  -webkit-user-select:none;
+}
+.amBrandBtn:active{ transform: scale(.98); }
+.amBrandBtnCancel{
+  background: #eef2f7;
+  color: #0f172a;
+}
+.amBrandBtnYes{
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 12px 22px rgba(37,211,102,.25);
+}
+.amBrandBtnYes:hover{ opacity: .95; }</style><script id="am-brand-click-js">(function(){
+  function ready(fn){
+    if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', fn); }
+    else { fn(); }
+  }
+
+  function setBrandValue(brand){
+    var sel = document.getElementById('brand');
+    if(!sel) return false;
+
+    var opt = Array.prototype.find.call(sel.options, function(o){
+      return (o.value || '').toLowerCase() === brand.toLowerCase() ||
+             (o.textContent || '').trim().toLowerCase() === brand.toLowerCase();
+    });
+
+    if(!opt) return null;
+
+    sel.value = opt.value;
+
+    try{
+      sel.dispatchEvent(new Event('change', {bubbles:true}));
+    }catch(e){
+      var ev = document.createEvent('HTMLEvents');
+      ev.initEvent('change', true, false);
+      sel.dispatchEvent(ev);
+    }
+    return true;
+  }
+
+  function openExistingForm(){
+    var opener = document.querySelector('[data-open-form]');
+    if(opener){
+      opener.click();
+      return true;
+    }
+    var modal = document.getElementById('formModal');
+    if(modal){
+      modal.classList.add('open');
+      document.body.classList.add('modal-open');
+      return true;
+    }
+    return false;
+  }
+
+  function openFormAndSelectBrand(brand){
+    if(!openExistingForm()) return;
+
+    var tries = 0;
+    (function waitOptions(){
+      tries++;
+      var res = setBrandValue(brand);
+      if(res === true) return;
+      if(res === false) return;
+      if(tries < 30){
+        setTimeout(waitOptions, 60);
+      }
+    })();
+  }
+
+  // --- Confirm dialog ---
+  function showConfirm(brand, onYes){
+    var overlay = document.getElementById('amBrandConfirmOverlay');
+    var brandEl = document.getElementById('amBrandConfirmBrand');
+    var btnYes = document.getElementById('amBrandConfirmYes');
+    var btnCancel = document.getElementById('amBrandConfirmCancel');
+    if(!overlay || !brandEl || !btnYes || !btnCancel){
+      // fallback: si por algo no existe dialogo, abre directo
+      onYes();
+      return;
+    }
+
+    brandEl.textContent = brand;
+
+    function close(){
+      overlay.classList.remove('show');
+      btnYes.removeEventListener('click', yes);
+      btnCancel.removeEventListener('click', cancel);
+      overlay.removeEventListener('click', overlayClick);
+      document.removeEventListener('keydown', esc);
+    }
+    function yes(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      close();
+      onYes();
+    }
+    function cancel(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      close();
+    }
+    function overlayClick(e){
+      if(e.target === overlay) cancel(e);
+    }
+    function esc(e){
+      if(e.key === 'Escape') cancel(e);
+    }
+
+    btnYes.addEventListener('click', yes, {passive:false});
+    btnCancel.addEventListener('click', cancel, {passive:false});
+    overlay.addEventListener('click', overlayClick, {passive:false});
+    document.addEventListener('keydown', esc);
+
+    overlay.classList.add('show');
+    // focus al "Sí" para rapidez en móvil/teclado
+    try{ btnYes.focus(); }catch(_){}
+  }
+
+  ready(function(){
+    var chips = document.querySelectorAll('.brands-list span');
+    if(!chips || !chips.length) return;
+
+    chips.forEach(function(chip){
+      var brand = (chip.textContent || '').trim();
+      if(!brand) return;
+
+      chip.setAttribute('role','button');
+      chip.setAttribute('tabindex','0');
+      chip.setAttribute('aria-label', 'Seleccionar marca ' + brand);
+
+      function go(){
+        openFormAndSelectBrand(brand);
+      }
+      function handler(e){
+        try{ e.preventDefault(); e.stopPropagation(); }catch(_){}
+        showConfirm(brand, go);
+      }
+
+      chip.addEventListener('click', handler, {passive:false});
+      chip.addEventListener('touchend', handler, {passive:false});
+      chip.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          handler(e);
+        }
+      });
+    });
+  });
+})();</script><style id="intro-tagline-style">.intro-tagline{
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #475569;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+}</style><style id="intro-tagline-quote-style">
+.intro-tagline-quote{
+  font-size: 13px !important;      /* ~50% más pequeño */
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #0b5bd3 !important;
+  font-style: italic;
+  margin: 0 0 22px 0;              /* separación con el título */
+  text-align: center;
+  line-height: 1.35;
+}
+@media (max-width: 480px){
+  .intro-tagline-quote{
+    font-size: 12px !important;
+    margin-bottom: 24px;
+  }
+}
+</style>
+<style id="am-quote-bigger-spacing">
+/* Ajuste solicitado: frase más grande, azul y separada del título */
+.amx-subhook, 
+.hero .amx-subhook,
+.hero blockquote,
+.hero .quote,
+.hero .amx-quote{
+  font-size: 13px !important;
+  color: #0056b3 !important;
+  margin-bottom: 28px !important;
+  line-height: 1.3 !important;
+}
+@media (max-width: 520px){
+  .amx-subhook, 
+  .hero .amx-subhook,
+  .hero blockquote,
+  .hero .quote,
+  .hero .amx-quote{
+    font-size: 12px !important;
+    margin-bottom: 26px !important;
+  }
+}
+</style>
+<style id="am-quote-spacing-v23">
+/* Ajuste solicitado: frase superior más grande y con MÁS separación del título */
+.intro-tagline-quote{
+  font-size: 30px !important;
+  line-height: 1.25 !important;
+  color: #0056b3 !important;
+  margin-top: 8px !important;
+  margin-bottom: 46px !important; /* separación real */
+  text-align: center;
+}
+/* Evita que el margen superior del título "se coma" la separación */
+.intro-tagline-quote + h1{
+  margin-top: 0 !important;
+}
+@media (max-width: 520px){
+  .intro-tagline-quote{
+    font-size: 28px !important;
+    margin-bottom: 44px !important;
+  }
+}
+</style>
+<style id="am-final-quote-force">/* Ajuste: frase ADIVINAR más grande */
+p.intro-tagline-quote{ font-size:15px !important; }
+@media (max-width:480px){ p.intro-tagline-quote{ font-size:17px !important; } }</style></head>
 <body>
 <div aria-label="Agendar diagnóstico" aria-modal="true" class="calendly-overlay" id="calendly-overlay" role="dialog">
 <div class="calendly-box">
@@ -760,92 +2367,13 @@
 <section class="hero" style="max-width:980px;margin:0 auto;width:100%">
 <div class="wrap grid" style="">
 <div class="col-8" style="margin-left:120px;width:100%;max-width:none">
-<h1>ESPECIALISTAS EN DIAGNÓSTICO DE FALLAS AUTOMOTRICES</h1>
-<p class="amx-subhook">“SI la falla de tu vehículo te trajo hasta Aquí<br/>Es porque necesitas una evaluación profesional antes de seguir gastando mas tiempo y dinero”</p>
-<div class="wrap" style="margin-bottom:10px"><h2 style="text-align:center; margin-bottom:20px; font-weight:700;">Marcas que atendemos</h2><div class="brands-list"><span style="">Honda</span><span style="">Toyota</span><span style="">Nissan</span><span style="">Mitsubishi</span><span style="">Kia</span><span style="">Hyundai</span><span style="">Mazda</span><span style="">Jeep</span><span style="">Dodge</span><span style="">Chevrolet</span><span style="">Ford</span></div></div>
-<p class="amx-commitment">Nuestro compromiso es ayudarte a determinar qué está fallando.<br/>
-Para lograrlo aplicamos procesos técnicos que definen el camino correcto.<br/>
-</p>
-<div class="amx-card">
-<div class="amx-note">
-<div class="i">ℹ️</div>
-<p><b>Antes de recomendar DIAGNÓSTICOS AVANZADOS</b>, realizamos siempre una <b>Revisión Preliminar</b>. Esto asegura que las pruebas posteriores sean realmente necesarias y estén dirigidas al origen del problema.</p>
+<p class="intro-tagline-quote" style="color:#0b5bd3 !important; margin:0 0 22px 0 !important; text-align:center !important; line-height:1.35 !important; font-style:italic !important; font-weight:700 !important;">“ADIVINAR no es diagnosticar. Cambiar piezas no es reparar.”</p><h1>ESPECIALISTAS EN DIAGNÓSTICO Y REPARACIÓN DE FALLAS AUTOMOTRICES</h1>
+<div class="am-service-question">
+<h2>¿Qué tipo de servicio necesitas?</h2>
 </div>
-<h2 style="color:#0d47a1;margin:0 0 10px">✅ ¿Qué incluye esta Revisión?</h2>
-<ul class="amx-checklist"><li class="amx-icon-scan"><span class="icon">🖥️</span> Escaneo OBD-II, lectura y análisis de códigos de falla.</li>
-<li class="amx-icon-electric"><span class="icon">⚡</span> Chequeo eléctrico básico en sistemas que involucran fallas.</li>
-<li class="amx-icon-network"><span class="icon">🔗</span> Escaneo Smart con topología de redes (todas las computadoras).</li>
-<li class="amx-icon-cloud"><span class="icon">☁️</span> Diagnóstico asistido en la nube.</li>
-<li class="amx-icon-db"><span class="icon">📚</span> Acceso a bases de datos del fabricante.</li>
-<li class="amx-icon-sensors"><span class="icon">🌡️</span> Chequeo de sensores en tiempo real.</li>
-<li class="amx-icon-dynamic"><span class="icon">🧪</span> Pruebas dinámicas bajo condiciones reales.</li>
-<li class="amx-icon-note"><span class="icon">📝</span> Recomendación técnica personalizada.</li>
-<div class="amx-important">
-<strong>ℹ️ Importante</strong>
-    Esta revisión es una valoración técnica preliminar.<br/>
-    Con los resultados se define la ruta de Diagnóstico más adecuada.<br/>
-    Según el caso, se pueden recomendar pruebas adicionales, Diagnósticos Avanzados o servicios de Laboratorio Electrónico Especializado para confirmar con exactitud el origen de la falla.<br/>
-    Tanto las evaluaciones complementarias como las Reparaciones se cotizan de manera independiente previa autorización del cliente.
-  </div>
-</ul>
-</div>
-<p></p>
-</div>
-</div>
-</section>
 <section class="section" id="oferta">
 <div class="wrap grid">
 <div class="col-12">
-<!-- BLOQUE MARCAS (colocado arriba de la oferta) -->
-<div class="wrap consult-cta">
-<div class="card" style="text-align:center">
-<div style="margin-top:10px; text-align:center">
-<p class="muted"><i>¿Tienes alguna duda?</i></p>
-<p class="muted"><i>¿Necesitas Asesoría?</i></p>
-<p class="muted"><b>CONSULTA</b> Gratis con nuestro equipo técnico. Envíanos los datos y te Ayudamos.</p>
-<a aria-label="Consultar con un técnico" class="ready btn cta" data-open-form="" href="#" style="background-color:#25D366;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;color:#fff;font-weight:600;text-decoration:none;"> Consultar con un técnico</a></div>
-</div>
-</div>
-
-<div aria-hidden="true" class="spot-glow-wrap"><div class="spot-glow"></div></div><div aria-label="Reserva en línea – prioridad diaria" class="spot-premium-wrap" role="region">
-<div class="spot-premium">
-<div class="row">
-
-<div>
-<div class="exclusivo-prioridad exclusivo-prioridad--center"><span class="badge prioridad">PRIORIDAD</span></div>
-<h3 class="spot-title">Reserva en Línea y Obten Cupo Preferencial</h3>
-<p class="spot-text">
-          Sin listas de Espera, Sin llamadas, Sin Pagos por Adelantado, <strong>Sin Complicaciones, Sin Compromisos</strong> Solo Reservas y YA!
-           <strong>“Desde tu celular, Directo al taller.”</strong>.
-        </p>
-<div class="spot-note">⏱️ Reservas en MENOS de 1 Minuto.</div>
-<div aria-label="Sin hacer pagos por adelantado" class="spot-guarantee">
-
-<span>Después de tu Reserva Obtendrás: — <strong> Atención 100% Personalizada por WhatsApp</strong>.</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="card offer-am" style="width:50%;margin:0 auto;box-sizing:border-box">
-<div style="display:flex;align-items:center;gap:12px;margin-left:24px;justify-content:space-between;margin-bottom:16px">
-<span class="pill-am">Exclusivo en línea</span>
-<div class="timer-am" style=";font-size:1.1rem;font-weight:700;margin-left:8px"><span id="amTimer">20:00</span> min</div>
-</div>
-<h2 style="margin:8px 0 6px;margin-left:24px;text-align:center"><span>Reserva tu Cupo HOY y obtén DESCUENTO</span><br/><span style="font-weight:400;font-size:0.95em">en tu primera revisión</span></h2><div style="display:flex;align-items:flex-end;gap:10px;justify-content:center;margin-left:0;margin:18px 0 10px 0"><p class="muted-light" style="margin:0;text-align:center">Precio regular <span style="text-decoration:line-through;opacity:.85;font-weight:700;font-size:2.2rem;text-decoration-thickness:2.5px">US$85.00</span></p><p class="muted-light" style="margin:0;font-size:1.6rem;font-weight:800"><span style="font-weight:800;color:#fff;font-size:1.35rem"><span style="font-size:2rem;font-weight:900;">HOY</span> <span style="font-size:1.1rem">US$</span><span style="font-size:1.9rem;font-weight:800;line-height:1">49</span><span style="font-size:1.1rem">.00</span></span></p></div>
-<div style="display:block;margin-top:12px;text-align:center"><a class="oferta-btn" data-calendly="1" data-open-form="" href="#" style="margin-top:4px;display:inline-flex;justify-content:center;align-items:center;margin:8px auto 0 auto">
-
-<span>Reservar Ahora</span>
-</a><div class="muted-light" style="font-size:.85rem;margin-bottom:8px;text-align:center;margin-top:10px">Válido únicamente al reservar desde esta página.<br/><span style='\"font-size:0.9rem;font-weight:600;color:#fff;\"'>RESTRICCIONES APLICAN</span></div></div>
-</div>
-<div class="wrap" style="margin-top:14px;">
-</div>
-</div>
-</div>
-</section>
-<section class="section" id="consulta">
-</section>
-<section class="section" id="servicios">
 <div class="services-grid-4 wrap grid" style="margin-top:0">
 <div class="col-4">
 <div class="card service-box"><h2 style="font-size:1.6rem;font-weight:800;text-align:center;margin:18px 0;">Diagnóstico avanzado</h2></div>
@@ -854,9 +2382,92 @@ Para lograrlo aplicamos procesos técnicos que definen el camino correcto.<br/>
 <div class="card service-box"><h2 style="font-size:1.6rem;font-weight:800;text-align:center;margin:18px 0;">Programación y adaptaciones</h2></div>
 </div>
 <div class="col-4">
-<div class="card service-box"><h2 style="font-size:1.6rem;font-weight:800;text-align:center;margin:18px 0;">Reparación experta</h2></div>
+<div class="card service-box"><h2 style="font-size:1.6rem;font-weight:800;text-align:center;margin:18px 0;">Reparación</h2></div>
 </div>
 </div>
+<!-- BLOQUE MARCAS (colocado arriba de la oferta) -->
+<div class="wrap consult-cta">
+<div class="card" style="text-align:center">
+<div style="margin-top:10px; text-align:center">
+<p class="muted"><i>¿Tienes dudas?</i></p>
+<p class="muted"><i>¿Necesitas Asesoría?</i></p>
+<p class="muted"><b>CONSULTA</b> Gratis con nuestro equipo técnico. Envíanos los datos y te Ayudamos.</p>
+<a aria-label="Consultar con un técnico" class="ready btn cta am-consult-btn" data-open-form="" href="#" style="background-color:#25D366;display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;color:#fff;font-weight:600;text-decoration:none;"><span aria-hidden="true" class="am-wa-ico">
+<svg aria-label="WhatsApp" role="img" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#25D366" height="30" rx="8" width="30" x="1" y="1"></rect>
+<path d="M16 6.2c-5.4 0-9.8 4.2-9.8 9.5 0 1.9.6 3.7 1.6 5.2L6.3 26l5.2-1.4c1.4.7 3 1.1 4.6 1.1 5.4 0 9.8-4.2 9.8-9.5S21.4 6.2 16 6.2zm0 17.2c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.8-.2-.3c-.9-1.2-1.4-2.6-1.4-4.1 0-4 3.4-7.3 7.6-7.3s7.6 3.3 7.6 7.3-3.4 7.3-7.6 7.3zm4.5-5.2c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.5.1-.1.2-.6.7-.7.9-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.5-.9-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.3.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3 0-.1-.5-1.2-.7-1.7-.2-.5-.4-.4-.5-.4h-.4c-.1 0-.3.1-.4.2-.1.1-.6.6-.6 1.5 0 .9.6 1.7.7 1.9.1.2 1.2 2 2.9 2.8 1.7.8 1.7.6 2 .6.3 0 1.1-.4 1.2-.8.1-.4.1-.7.1-.8-.1-.1-.2-.1-.4-.2z" fill="#FFFFFF"></path>
+</svg>
+</span>
+<span class="am-consultar-text">Consultar con un técnico</span></a></div>
+</div>
+</div>
+<div aria-hidden="true" class="spot-glow-wrap"><div class="spot-glow"></div></div><div aria-label="Reserva en línea – prioridad diaria" class="spot-premium-wrap" role="region">
+<div class="spot-premium">
+<div class="row">
+<div>
+<div class="exclusivo-prioridad exclusivo-prioridad--center"><span class="badge prioridad">PRIORIDAD</span>
+</div>
+<h3 class="spot-title">Reserva en Línea y Obten Cupo Preferencial</h3>
+<div class="am-descuento-linea">
+<strong>Obtén <span class="am-descuento-destacado">hasta un 40% de descuento</span> en diagnósticos avanzados al reservar en línea.</strong>
+</div>
+<p class="spot-text">
+          Sin listas de Espera, Sin Pagos por Adelantado, <strong>Sin Complicaciones.</strong>
+</p>
+<div class="spot-note">⏱️ Reservas en MENOS de 1 Minuto.</div>
+<div aria-label="Sin hacer pagos por adelantado" class="spot-guarantee">
+<span>Después de tu Reserva Obtendrás: — <strong> Atención 100% Personalizada por WhatsApp</strong>.</span>
+</div>
+<div class="am-reserva-btn-bottom">
+<div class="prioridad-cta">
+<a class="oferta-btn" data-calendly="1" data-open-form="" href="#" style="margin-top:4px;display:inline-flex;justify-content:center;align-items:center;margin:8px auto 0 auto">
+<span>Reservar Ahora</span>
+</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wrap" style="margin-top:14px;">
+</div>
+</div>
+</div>
+</section>
+<div class="wrap" style="margin-bottom:10px"><h2 style="text-align:center; margin-bottom:20px; font-weight:700;">Marcas que atendemos</h2><div class="brands-list"><span style="">Honda</span><span style="">Toyota</span><span style="">Nissan</span><span style="">Mitsubishi</span><span style="">Kia</span><span style="">Hyundai</span><span style="">Mazda</span><span style="">Jeep</span><span style="">Dodge</span><span style="">Chevrolet</span><span style="">Ford</span></div></div>
+<!-- ================== SOPORTE EXCLUSIVO PARA TALLERES ================== -->
+<div class="wrap" id="soporte-tecnicos" style="margin-bottom:10px;">
+<div class="card tech-card">
+<div class="tech-head">
+<div class="tech-badge">EXCLUSIVO PARA TALLERES</div>
+<h2 class="tech-title">Soporte técnico para mecánicos y eléctricos</h2>
+</div>
+<div class="tech-grid">
+<div class="tech-col">
+<h3 class="tech-h3">¿En qué te apoyamos?</h3><ul><li>Diagnóstico guiado (pruebas avanzadas)</li><li>Interpretación de datos en vivo (scanner / PIDs)</li><li>Programación, adaptaciones y reaprendizajes</li><li>Vehículos que no encienden, BCM/ECM/TCM y redes CAN</li><li>Casos eléctricos complejos (consumos, wake-up, comunicación)</li><li>Diagramas Eléctricos</li></ul>
+</div>
+<div class="tech-col tech-col-cta">
+<p class="tech-note" style="text-align:center; margin-top:14px; font-size:0.95rem; color:#444;">
+  Puedes solicitar mayor información por WhatsApp haciendo clic en el botón.
+</p>
+<a class="tech-btn" href="https://wa.me/50361552132?text=Hola+Automotriz+Medina%2C+soy+t%C3%A9cnico+automotriz%2C+visit%C3%A9+su+sitio+web+y+necesito+mayor+informaci%C3%B3n+sobre+el+soporte+t%C3%A9cnico." id="btnSoporteTecnicos" rel="noopener" target="_blank">
+<span class="tech-btn-ico">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 32 32">
+<path d="M19.11 17.44c-.27-.14-1.6-.79-1.85-.88-.25-.09-.44-.14-.62.14-.18.27-.71.88-.87 1.06-.16.18-.32.2-.6.07-.27-.14-1.13-.42-2.15-1.33-.79-.7-1.33-1.57-1.49-1.84-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.44-.46-.62-.46h-.53c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.95 4.67 4.14.65.28 1.15.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.83-1.28.23-.62.23-1.15.16-1.28-.07-.14-.25-.2-.53-.34zM16.03 5.33c-5.86 0-10.63 4.77-10.63 10.63 0 1.86.49 3.68 1.42 5.28L5.2 26.67l5.58-1.47c1.54.84 3.28 1.28 5.25 1.28 5.86 0 10.63-4.77 10.63-10.63S21.89 5.33 16.03 5.33zm0 19.23c-1.79 0-3.46-.49-4.9-1.34l-.35-.21-3.31.87.88-3.22-.23-.33a8.52 8.52 0 0 1-1.37-4.61c0-4.73 3.85-8.58 8.58-8.58s8.58 3.85 8.58 8.58-3.85 8.58-8.58 8.58z"></path>
+</svg>
+</span>
+<span class="tech-btn-text">Solicitar soporte</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ================================================================ -->
+</div>
+</div>
+</section>
+<section class="section" id="consulta">
+</section>
+<section class="section" id="servicios">
 </section>
 <section class="section" id="marcas">
 </section>
@@ -1092,7 +2703,7 @@ window.open(url, '_blank');});
     });
   }
 })();
-</script><div class="modal-am" id="modalProgramacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Programación y adaptaciones</h2><p>Hacemos Programación y reaprendizaje de módulos, llaves e inmovilizadores etc, en Ford y Chevrolet, contamos con soporte para marcas como Nissan, Toyota, Hyundai, Kia, Honda, Mazda, Jeep y Dodge (según modelo). Adaptamos unidades nuevas o usadas (Solicitar disponibilidad).</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="programacion" href="#" onclick="document.getElementById('modalProgramacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalProgramacion').style.display='none'" type="button">Cancelar</button></div></div></div><div class="modal-am" id="modalReparacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Reparación experta</h2><p>Reparamos fallas complejas en electrónica automotriz: módulos, cableado, Redes y sistemas eléctricos; trabajamos únicamente en intervenciones que requieren experiencia avanzada No realizamos servicios Express de ningun tipo.</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="reparacion experta" href="#" onclick="document.getElementById('modalReparacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalReparacion').style.display='none'" type="button">Cancelar</button></div></div></div><script>
+</script><div class="modal-am" id="modalProgramacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Programación y adaptaciones</h2><p>Hacemos Programación y reaprendizaje de módulos, llaves e inmovilizadores etc, en Ford y Chevrolet, contamos con soporte para marcas como Nissan, Toyota, Hyundai, Kia, Honda, Mazda, Jeep y Dodge (según modelo). Adaptamos unidades nuevas o usadas (Solicitar disponibilidad).</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="programacion" href="#" onclick="document.getElementById('modalProgramacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalProgramacion').style.display='none'" type="button">Cancelar</button></div></div></div><div class="modal-am" id="modalReparacion"><div class="content"><h2 style="text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:12px;">Reparación</h2><p>Reparamos fallas complejas en electrónica automotriz: módulos, cableado, Redes, sistemas eléctricos, mecánicos y electromecánicos; trabajamos únicamente en intervenciones que requieren experiencia avanzada</p><h3>¿Tienes dudas? Consulta gratis con un técnico</h3><div class="actions"><a class="btn-primary" data-open-form="" data-service="reparacion experta" href="#" onclick="document.getElementById('modalReparacion').style.display='none'"> Contactar</a><button class="btn-secondary" onclick="document.getElementById('modalReparacion').style.display='none'" type="button">Cancelar</button></div></div></div><script>
 (function(){
   var grid = document.querySelector('.services-grid-4.wrap.grid');
   if(!grid) return;
@@ -1336,5 +2947,256 @@ window.open(url, '_blank');});
   });
 })();
 </script>
-</body>
+<!-- Botón flotante de llamada -->
+<div aria-label="Acceso rápido a llamada" class="am-call-float-wrap">
+<div class="am-call-label">Llamar ahora</div>
+<a aria-label="Llamar al 71660867" class="am-call-float" href="tel:+50371660867">
+<svg aria-hidden="true" focusable="false" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24c1.12.37 2.33.57 3.59.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.2 2.47.57 3.59a1 1 0 0 1-.24 1l-2.21 2.2z" fill="currentColor"></path>
+</svg>
+</a>
+</div>
+<style id="am-consult-btn-mobile-animation-fix">
+/* ===== FIX: Animación del botón "Consultar con un técnico" en MÓVIL (no depende de hover) ===== */
+a.am-consult-btn{
+  transform-origin: center;
+  will-change: transform, box-shadow;
+}
+
+/* En móviles (sin hover / toque): animación continua */
+@media (hover: none) and (pointer: coarse){
+  a.am-consult-btn{
+    animation: amConsultFloat 1.9s ease-in-out infinite;
+  }
+}
+
+/* En desktop, se mantiene un movimiento sutil (y el hover sigue funcionando por los estilos existentes) */
+@media (hover: hover) and (pointer: fine){
+  a.am-consult-btn{
+    animation: amConsultFloat 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes amConsultFloat{
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-2px) scale(1.03); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  a.am-consult-btn{ animation: none !important; }
+}
+
+/* Al tocar: respuesta inmediata */
+a.am-consult-btn:active{
+  animation: none !important;
+  transform: scale(0.97);
+}
+</style>
+<script id="am-oferta-btn-mobile-tap-js-fix">
+/* ===== FIX: iOS/Android - asegurar click inmediato en "Reservar Ahora" ===== */
+(function(){
+  try{
+    var btns = document.querySelectorAll('a.oferta-btn[data-open-form], a.oferta-btn[data-calendly]');
+    if(!btns || !btns.length) return;
+
+    btns.forEach(function(btn){
+      var armed = false;
+
+      // En móviles, forzamos el "click" en touchend para evitar el primer toque perdido por :hover/focus.
+      btn.addEventListener('touchend', function(e){
+        // Solo para móviles (touch). Evita doble ejecución.
+        if(armed) return;
+        armed = true;
+        e.preventDefault();
+        e.stopPropagation();
+        // Disparar click programáticamente (bubbles/cancelable) para que lo capturen los listeners existentes.
+        var ev = new MouseEvent('click', {bubbles:true, cancelable:true, view:window});
+        btn.dispatchEvent(ev);
+        // liberar inmediatamente
+        setTimeout(function(){ armed = false; }, 0);
+      }, {passive:false});
+
+      // Mejor respuesta también con pointerup (algunos Android)
+      btn.addEventListener('pointerup', function(e){
+        // Si viene de touch, ya lo manejó touchend
+        if(e.pointerType === 'touch'){
+          // prevent default ghost behaviors
+          e.preventDefault();
+        }
+      }, {passive:false});
+    });
+  }catch(err){
+    // silencioso: no romper la página
+  }
+})();
+</script>
+<style id="am-reservar-btn-animation">
+/* ===== Animación exagerada botón "Reservar Ahora" ===== */
+a.oferta-btn{
+  transform-origin: center;
+  will-change: transform, box-shadow;
+}
+
+/* Móvil: animación más marcada */
+@media (hover: none) and (pointer: coarse){
+  a.oferta-btn{
+    animation: reservarPulse 1.6s ease-in-out infinite;
+  }
+}
+
+/* Desktop: un poco más suave */
+@media (hover: hover) and (pointer: fine){
+  a.oferta-btn{
+    animation: reservarPulse 2.0s ease-in-out infinite;
+  }
+}
+
+@keyframes reservarPulse{
+  0%   { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,.25); }
+  35%  { transform: scale(1.12); box-shadow: 0 18px 36px rgba(0,0,0,.35); }
+  65%  { transform: scale(0.96); box-shadow: 0 8px 16px rgba(0,0,0,.22); }
+  100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,.25); }
+}
+
+/* Feedback inmediato al tocar */
+a.oferta-btn:active{
+  animation: none !important;
+  transform: scale(0.93);
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  a.oferta-btn{
+    animation: none !important;
+  }
+}
+</style>
+<style id="am-tech-support-module-style">
+
+/* ===== Módulo Soporte a Técnicos ===== */
+.tech-card{
+  border: 2px solid rgba(13,71,161,.18);
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(13,71,161,.10);
+}
+.tech-head{ text-align:center; padding: 6px 6px 0; }
+.tech-badge{
+  display:inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  font-size: .82rem;
+  border: 1px solid rgba(13,71,161,.25);
+  background: rgba(13,71,161,.06);
+}
+.tech-title{ margin: 10px 0 6px; font-size: 1.7rem; }
+.tech-sub{ margin: 0 auto; max-width: 720px; }
+
+.tech-grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 18px;
+  margin-top: 14px;
+  align-items: stretch;
+}
+.tech-col{ padding: 6px; }
+.tech-h3{ margin: 4px 0 8px; font-size: 1.1rem; }
+.tech-list{ margin: 0; padding-left: 18px; }
+.tech-list li{ margin: 7px 0; }
+
+.tech-note{
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.08);
+  margin-bottom: 12px;
+}
+
+/* Botón WhatsApp (verde) */
+.tech-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 16px;
+  font-weight: 900;
+  text-decoration:none;
+  border: 2px solid #25D366;      /* WhatsApp green */
+  background: #25D366;
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(37,211,102,.30);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  touch-action: manipulation;
+}
+.tech-btn:hover{
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 18px 38px rgba(37,211,102,.38);
+  filter: brightness(0.98);
+}
+.tech-btn:active{
+  transform: scale(0.97);
+  box-shadow: 0 10px 22px rgba(37,211,102,.28);
+}
+
+.tech-btn-ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 22px;
+  height: 22px;
+}
+.tech-btn-ico svg{
+  width: 22px;
+  height: 22px;
+  display:block;
+  fill: currentColor;
+}
+.tech-mini{ margin-top: 8px; font-size: .85rem; opacity: .75; text-align:center; }
+
+@media (max-width: 820px){
+  .tech-grid{ grid-template-columns: 1fr; }
+  .tech-title{ font-size: 1.55rem; }
+}
+
+</style>
+<script id="am-tech-support-module-js">
+/* ===== WhatsApp Soporte Técnicos =====
+   Coloca aquí el número exclusivo de técnicos en formato internacional sin +, sin espacios.
+   Ejemplo El Salvador: 503XXXXXXXX
+*/
+window.AM_TECH_WA_NUMBER = window.AM_TECH_WA_NUMBER || "50361552132";
+(function(){
+  var btn = document.getElementById("btnSoporteTecnicos");
+  if(!btn) return;
+  var number = (window.AM_TECH_WA_NUMBER || "").replace(/\D/g,'');
+  if(!number || number === "NUMERO_AQUI") return; // queda el placeholder
+  btn.href = "https://wa.me/" + number + "?text=Hola%20Automotriz%20Medina%2C%20soy%20t%C3%A9cnico%20automotriz%2C%20visit%C3%A9%20su%20sitio%20web%20y%20necesito%20mayor%20informaci%C3%B3n%20sobre%20el%20soporte%20t%C3%A9cnico.";
+})();
+</script>
+<style id="am-call-btn-nudge-only">
+/* ===== Ajuste fino SIN comprimir: solo corrimiento leve (móvil) ===== */
+@media (max-width: 520px){
+  /* NO cambiar tamaños ni padding: solo mover visualmente */
+  .services-grid-4,
+  .services-grid,
+  .services-section{
+    transform: translateX(-8px); /* corrimiento leve a la izquierda */
+  }
+
+  /* Ícono de llamada: micro-ajuste a la derecha */
+  .call-float,
+  .am-call-btn,
+  .floating-call,
+  a.call-btn{
+    right: 6px !important; /* micro-ajuste, sin afectar tamaño */
+  }
+}
+</style>
+<div aria-describedby="amBrandConfirmSub" aria-labelledby="amBrandConfirmTitle" aria-modal="true" id="amBrandConfirmOverlay" role="dialog"><div id="amBrandConfirmBox"><div id="amBrandConfirmHeader"><h3 id="amBrandConfirmTitle">¿Necesitas asesoría para tu vehículo?</h3><p id="amBrandConfirmSub">Marca seleccionada: <span id="amBrandConfirmBrand">—</span></p></div><div id="amBrandConfirmActions"><button class="amBrandBtn amBrandBtnCancel" id="amBrandConfirmCancel" type="button">Cancelar</button><button class="amBrandBtn amBrandBtnYes" id="amBrandConfirmYes" type="button">Sí</button></div></div></div></body>
 </html>
