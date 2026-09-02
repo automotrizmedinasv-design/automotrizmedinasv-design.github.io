@@ -5028,6 +5028,8 @@ body.welcome-active{
    v117 · Bienvenida adaptada al viewport completo del teléfono
    ========================================================== */
 #welcomeMedina.welcome-medina{
+  will-change:opacity,visibility;
+
   width:100vw !important;
   height:100vh !important;
   min-height:100vh !important;
@@ -5159,6 +5161,18 @@ body.welcome-active{
   }
 }
 </style>
+
+<style>
+/* v130 · Respuesta inmediata de la pantalla de bienvenida */
+#welcomeMedina.welcome-medina{
+  transition:opacity .12s ease, visibility .12s ease !important;
+}
+#welcomeMedina.is-leaving{
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+</style>
 </head>
 <body><div aria-label="Bienvenida a Automotriz Medina" aria-modal="true" class="welcome-medina" id="welcomeMedina" role="dialog">
 <div aria-hidden="true" class="welcome-medina-bg">
@@ -5181,7 +5195,8 @@ body.welcome-active{
       <strong>9:30 a. m. a 12:00 p. m.</strong> y de <strong>2:00 p. m. a 4:30 p. m.</strong>,
       de <strong>Lunes a Viernes</strong>.
     </p>
-<button class="welcome-enter" id="welcomeEnterSite" type="button">
+<button class="welcome-enter" id="welcomeEnterSite" type="button"
+onclick="(function(b){var w=document.getElementById('welcomeMedina');document.body.classList.remove('welcome-active');document.documentElement.style.overflow='';document.body.style.overflow='';document.documentElement.style.touchAction='pan-y';document.body.style.touchAction='pan-y';if(w){w.style.pointerEvents='none';w.style.opacity='0';w.style.visibility='hidden';setTimeout(function(){if(w&&w.parentNode)w.parentNode.removeChild(w)},80)}b.blur()})(this)">
 <span>Ingresar al sitio</span>
 <svg aria-hidden="true" viewbox="0 0 24 24">
 <path d="M5 12h13M13 7l5 5-5 5"></path>
@@ -7150,13 +7165,21 @@ window.addEventListener('message',event=&gt;{
     }
   });
 
+  /* Acceso directo: si la URL ya trae #area-tecnicos,
+     abrimos la comunidad inmediatamente y conservamos el enlace. */
   if(location.hash === "#area-tecnicos"){
-    history.replaceState(
-      {amLayer:"am-base"},
-      "",
-      location.href.split("#")[0]
-    );
+    const welcome = document.getElementById("welcomeMedina");
+    if(welcome) welcome.remove();
+    document.body.classList.remove("welcome-active");
     unlockMainPage();
+
+    history.replaceState(
+      {amLayer:"technical-community", directEntry:true},
+      "",
+      location.href
+    );
+
+    openCommunity(false);
   }
 })();
 </script>
@@ -7245,11 +7268,13 @@ window.addEventListener('message',event=&gt;{
   }
 
   function closeWelcome(){
+    if(!welcome.isConnected) return;
     welcome.classList.add('is-leaving');
+    welcome.style.pointerEvents='none';
     unlockWelcome();
     setTimeout(()=>{
-      welcome.remove();
-    },620);
+      if(welcome.isConnected) welcome.remove();
+    },120);
   }
 
   enter.addEventListener('click',closeWelcome);
@@ -7341,7 +7366,8 @@ window.addEventListener('message',event=&gt;{
     const area=(params.get('area') || '').toLowerCase();
     const tech=(params.get('tecnicos') || '').toLowerCase();
 
-    return area==='tecnicos'
+    return location.hash==='#area-tecnicos'
+      || area==='tecnicos'
       || area==='tecnico'
       || tech==='1'
       || tech==='si'
@@ -7364,6 +7390,9 @@ window.addEventListener('message',event=&gt;{
     if(!wantsTechnicalArea()) return;
 
     removeWelcomeIfNeeded();
+
+    /* #area-tecnicos ya lo procesa el integrador principal. */
+    if(location.hash==='#area-tecnicos') return;
 
     let tries=0;
     const timer=setInterval(function(){
