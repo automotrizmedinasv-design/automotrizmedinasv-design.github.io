@@ -5174,7 +5174,18 @@ body.welcome-active{
 </style>
 
 
-<link href="https://automotrizmedinasv-design.github.io/" rel="canonical"/></head>
+<link href="https://automotrizmedinasv-design.github.io/" rel="canonical"/>
+<style id="v135-welcome-actions">
+#welcomeMedina .welcome-actions{width:min(430px,94%);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:10px;align-items:stretch;margin:0 auto}
+#welcomeMedina .welcome-actions .welcome-enter{width:100%!important;min-width:0;margin:0!important}
+#welcomeMedina .welcome-map{min-height:50px;padding:0 16px;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:9px;background:#fff;color:#202124;border:1px solid rgba(255,255,255,.82);box-shadow:0 12px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.9);font-size:.92rem;font-weight:850;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+#welcomeMedina .welcome-map:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.28);filter:brightness(1.02)}
+#welcomeMedina .welcome-map:active{transform:translateY(0) scale(.985)}
+#welcomeMedina .google-maps-mark{width:25px;height:25px;flex:0 0 25px;display:block}
+@media(max-width:699px){#welcomeMedina .welcome-actions{width:min(390px,94%);grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:8px}#welcomeMedina .welcome-actions .welcome-enter,#welcomeMedina .welcome-map{min-height:48px!important;font-size:.86rem!important;padding-left:12px;padding-right:12px}#welcomeMedina .google-maps-mark{width:23px;height:23px;flex-basis:23px}}
+@media(max-width:365px){#welcomeMedina .welcome-actions{grid-template-columns:1fr;width:min(330px,92%);gap:7px}#welcomeMedina .welcome-actions .welcome-enter,#welcomeMedina .welcome-map{min-height:44px!important}#welcomeMedina .welcome-message{font-size:.88rem!important;line-height:1.34!important;margin-bottom:10px!important}#welcomeMedina .welcome-hint{margin-top:7px!important}}
+</style>
+</head>
 <body><div aria-label="Bienvenida a Automotriz Medina" aria-modal="true" class="welcome-medina" id="welcomeMedina" role="dialog">
 <div aria-hidden="true" class="welcome-medina-bg">
 <div class="welcome-grid"></div>
@@ -5191,17 +5202,27 @@ body.welcome-active{
 <h1 class="welcome-specialty">Especialistas en Fallas Automotrices</h1>
 <div aria-hidden="true" class="welcome-divider"></div>
 <p class="welcome-message">
-      Si deseas visitarnos sin cita previa para <strong>asesoría técnica o revisión express</strong>,
-      te atendemos por orden de llegada, según la disponibilidad del momento, en horario de
-      <strong>9:30 a. m. a 12:00 p. m.</strong> y de <strong>2:00 p. m. a 4:30 p. m.</strong>,
-      de <strong>Lunes a Viernes</strong>.
+      Si deseas visitarnos sin cita previa para <strong>asesoría o revisión técnica</strong>, podemos atenderte por orden de llegada, según la disponibilidad del momento, en horarios de
+      <strong>9:30 AM a 12 PM</strong> y de <strong>2 PM a 4:30 PM</strong>, de <strong>Lunes a Viernes</strong>.
     </p>
+<div class="welcome-actions">
 <button class="welcome-enter" id="welcomeEnterSite" onclick="(function(b){var w=document.getElementById('welcomeMedina');document.body.classList.remove('welcome-active');document.documentElement.style.overflow='';document.body.style.overflow='';document.documentElement.style.touchAction='pan-y';document.body.style.touchAction='pan-y';if(w){w.style.pointerEvents='none';w.style.opacity='0';w.style.visibility='hidden';setTimeout(function(){if(w&amp;&amp;w.parentNode)w.parentNode.removeChild(w)},80)}b.blur()})(this)" type="button">
-<span>Ingresar al sitio</span>
+<span>Ingresar al Sitio Web</span>
 <svg aria-hidden="true" viewbox="0 0 24 24">
 <path d="M5 12h13M13 7l5 5-5 5"></path>
 </svg>
 </button>
+<a class="welcome-map" href="https://maps.app.goo.gl/UhsuBdofsHsAce3b9" target="_blank" rel="noopener" aria-label="Cómo llegar a Automotriz Medina en Google Maps">
+<svg class="google-maps-mark" viewBox="0 0 32 32" aria-hidden="true">
+<path fill="#34A853" d="M6.7 7.4A11.2 11.2 0 0 1 16 2c2.8 0 5.4 1 7.4 2.7l-5 5.1A4.8 4.8 0 0 0 16 9.1a5 5 0 0 0-4.7 3.3L6.7 7.4Z"/>
+<path fill="#4285F4" d="M11.3 12.4A5 5 0 0 0 11 14c0 3.3 3.2 7.3 5 9.5 1.2-1.5 3-3.9 4.1-6.2l5.2 4.1C22.6 25.9 16 30 16 30S3.7 22.5 3.7 14c0-2.4.7-4.7 2-6.6l5.6 5Z"/>
+<path fill="#FBBC04" d="M20.1 17.3c.6-1.2.9-2.3.9-3.3a5 5 0 0 0-.4-2l5.6-4.4A11.2 11.2 0 0 1 27.3 14c0 2.4-.9 5-2 7.4l-5.2-4.1Z"/>
+<path fill="#EA4335" d="M23.4 4.7a11.3 11.3 0 0 1 2.8 2.9L20.6 12a5 5 0 0 0-2.2-2.2l5-5.1Z"/>
+<circle cx="16" cy="14" r="2.8" fill="#fff"/>
+</svg>
+<span>Cómo llegar</span>
+</a>
+</div>
 <div class="welcome-hint">Automotriz Medina reparando vehículos desde 1986.</div>
 </main>
 </div>
