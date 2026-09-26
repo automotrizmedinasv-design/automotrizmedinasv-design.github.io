@@ -2945,8 +2945,9 @@ body.technical-support-active{overflow:hidden!important}
 </div>
 <div class="registration-state success-state" hidden="" id="successState">
 <div aria-hidden="true" class="success-check">✓</div>
-<h3>Tu solicitud fue aprobada</h3>
-<p>En un momento serás redirigido a WhatsApp para continuar con tu ingreso.</p>
+<h3>Continúa tu solicitud en WhatsApp</h3>
+<p>Ahora continúa en WhatsApp para solicitar tu ingreso al grupo.</p>
+<a id="registrationWhatsappLink" class="btn btn-whatsapp" href="https://chat.whatsapp.com/Gjeyf4acBCqCe051LKfi6S?s=cl&p=a&mlu=4" style="display:inline-flex;margin-top:18px;position:relative;z-index:2;" rel="noopener">Continuar a WhatsApp →</a>
 </div>
 </div>
 <div aria-hidden="true" class="intro-stage" id="introStage">
@@ -3407,13 +3408,17 @@ function showRegistrationSuccess(){
   successState.hidden=false;
   registrationOverlay.scrollTop=0;
 
-  // Mostramos brevemente la aprobación y luego continuamos automáticamente.
+  // En la página independiente debemos abrir WhatsApp directamente, no enviar
+  // un mensaje a una ventana padre que ya no existe.
+  // El botón visible permite continuar incluso si el navegador bloquea la redirección.
+  const whatsAppLink=document.getElementById('registrationWhatsappLink');
+  const whatsAppUrl='https://chat.whatsapp.com/Gjeyf4acBCqCe051LKfi6S?s=cl&p=a&mlu=4';
+  if(whatsAppLink) whatsAppLink.href=whatsAppUrl;
   setTimeout(()=>{
-    /* standalone: parent messaging disabled */ void({
-      type:'community-whatsapp-redirect',
-      url:"https://chat.whatsapp.com/Gjeyf4acBCqCe051LKfi6S?s=cl&p=a&mlu=4"
-    });
-  },1600);
+    if(!registrationOverlay.hidden && !successState.hidden){
+      window.location.assign(whatsAppUrl);
+    }
+  },1250);
 }
 
 function closeRegistrationResult(){
@@ -3728,7 +3733,7 @@ validateCommunityForm();
 <h3>Llaves, códigos y programación</h3>
 <p>Radios, rolling codes, llaves, controles y pinouts</p>
 </div>
-<div class="resource-category-count">6</div>
+<div class="resource-category-count">10</div>
 <div class="resource-category-arrow">›</div>
 </button>
 <div class="resource-inline-dropdown">
@@ -3781,7 +3786,7 @@ validateCommunityForm();
 <small>Catálogos de transponders, llaves OEM, controles, instrucciones de programación y pinouts.</small>
 </div>
 </a>
-</div>
+<a class="resource-tool-card" href="https://programmingadvanceds.net/remote-services/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">PA</div><div class="resource-tool-copy"><strong>Programming AdvancedS</strong><small>Servicios de programación automotriz remota; confirmar cobertura y requisitos con el proveedor.</small></div></a><a class="resource-tool-card" href="https://programmingcarpro.com/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">PC</div><div class="resource-tool-copy"><strong>Programming Car Pro</strong><small>Diagnóstico remoto y programación OEM de módulos y llaves en vehículos compatibles.</small></div></a><a class="resource-tool-card" href="https://www.onlineradiocodes.co.uk/es/jeep-radio-codes#product-form" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">JP</div><div class="resource-tool-copy"><strong>Online Radio Codes · Jeep</strong><small>Consulta de códigos de desbloqueo de radios Jeep mediante número de serie. Servicio externo de pago.</small></div></a></div>
 </div></main>
 <div id="resourceCategorySections"><section class="resource-category-section" data-category-section="info">
 <div class="resource-section-title"><button class="resource-section-back" type="button">← Categorías</button><span>📚</span><div><h3>Información técnica</h3><p>Información técnica online · vehículos hasta aprox. 2015</p></div></div>
@@ -3887,7 +3892,7 @@ validateCommunityForm();
 <a class="resource-tool-card" href="https://www.replacemyremote.com/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">R</div><div class="resource-tool-copy"><strong>Replace My Remote</strong><small>Catálogo de controles remotos, llaves y referencias</small></div></a>
 <a class="resource-tool-card" href="https://www.customecm.com/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">ECM</div><div class="resource-tool-copy"><strong>Custom ECM</strong><small>Referencia técnica y pinouts para computadoras automotrices</small></div></a>
 <a class="resource-tool-card" href="https://www.programyourremote.com/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">PR</div><div class="resource-tool-copy"><strong>Program Your Remote</strong><small>Instrucciones de programación de controles remotos por vehículo</small></div></a>
-</div>
+<a class="resource-tool-card" href="https://www.transpondery.com/help_guides_instructions.html" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">TR</div><div class="resource-tool-copy"><strong>Transpondery</strong><small>Catálogos de transponders, llaves OEM, controles, instrucciones de programación y pinouts.</small></div></a><a class="resource-tool-card" href="https://programmingadvanceds.net/remote-services/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">PA</div><div class="resource-tool-copy"><strong>Programming AdvancedS</strong><small>Servicios de programación automotriz remota; confirmar cobertura y requisitos con el proveedor.</small></div></a><a class="resource-tool-card" href="https://programmingcarpro.com/" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">PC</div><div class="resource-tool-copy"><strong>Programming Car Pro</strong><small>Diagnóstico remoto y programación OEM de módulos y llaves en vehículos compatibles.</small></div></a><a class="resource-tool-card" href="https://www.onlineradiocodes.co.uk/es/jeep-radio-codes#product-form" rel="noopener noreferrer" target="_blank"><div class="resource-tool-logo">JP</div><div class="resource-tool-copy"><strong>Online Radio Codes · Jeep</strong><small>Consulta de códigos de desbloqueo de radios Jeep mediante número de serie. Servicio externo de pago.</small></div></a></div>
 </section></section>
 <section aria-hidden="true" class="technical-support-overlay" hidden="" id="technicalSupportOverlay">
 <div class="technical-support-shell">
