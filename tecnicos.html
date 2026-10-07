@@ -3125,23 +3125,8 @@ body.technical-support-active{overflow:hidden!important}
 <label for="whatsapp">Número de WhatsApp</label>
 <input autocomplete="tel" id="whatsapp" inputmode="tel" name="whatsapp" placeholder="+503..." required=""/>
 </div>
-<div class="field full">
-<label for="actividad">¿Cuál describe mejor tu actividad actual?</label>
-<select id="actividad" name="actividad" required="">
-<option value="">Selecciona una opción</option>
-<option>Técnico automotriz independiente</option>
-<option>Técnico automotriz empleado</option>
-<option>Propietario de taller</option>
-<option>Estudiante</option>
-<option>Otro</option>
-</select>
-</div>
-<div class="field full conditional-other" hidden="" id="otroActividadWrap">
-<label for="otraActividad">Especifica tu actividad</label>
-<input id="otraActividad" name="otraActividad" placeholder="¿A qué te dedicas?"/>
-</div>
 <div class="field full areas-field">
-<label>¿En qué áreas te desarrollas? <span class="label-hint">Puedes seleccionar varias</span></label>
+<label>¿En qué te desarrollas? <span class="label-hint">Puedes seleccionar varias</span></label>
 <div class="areas-check-grid">
 <label class="check-card"><input name="areas" type="checkbox" value="Mecánica"/><span class="check-ui"></span><span>Mecánica</span></label>
 <label class="check-card"><input name="areas" type="checkbox" value="Diagnóstico"/><span class="check-ui"></span><span>Diagnóstico</span></label>
@@ -3159,7 +3144,7 @@ body.technical-support-active{overflow:hidden!important}
 </div>
 <button class="btn submit community-submit" disabled="" id="communitySubmit" type="submit">
 <svg aria-hidden="true" class="submit-wa-icon" viewbox="0 0 32 32"><path d="M16.04 3C9.42 3 4.05 8.25 4.05 14.73c0 2.28.67 4.4 1.82 6.2L4 27.7l7.02-1.82a12.16 12.16 0 0 0 5.02 1.08C22.67 26.96 28 21.7 28 15.22 28 8.74 22.67 3 16.04 3Zm0 21.85c-1.66 0-3.29-.43-4.72-1.24l-.34-.19-4.17 1.08 1.11-4.03-.22-.36a9.55 9.55 0 0 1-1.5-5.14c0-5.27 4.42-9.56 9.84-9.56 5.42 0 9.83 4.29 9.83 9.56s-4.4 9.88-9.83 9.88Z" fill="currentColor"></path></svg>
-<span>Solicitar ingreso a la comunidad</span>
+<span>Solicitar ingreso</span>
 </button>
 <div aria-live="polite" class="form-status" id="formStatus"></div>
 </form>
@@ -3317,9 +3302,6 @@ document.querySelectorAll('.clickable-card').forEach(card=>{
 
 
 const communityForm=document.getElementById('communityForm');
-const activitySelect=document.getElementById('actividad');
-const otherActivityWrap=document.getElementById('otroActividadWrap');
-const otherActivityInput=document.getElementById('otraActividad');
 const otherAreasWrap=document.getElementById('otrasAreasWrap');
 const otherAreasInput=document.getElementById('otrasAreas');
 const areaChecks=Array.from(document.querySelectorAll('input[name="areas"]'));
@@ -3329,11 +3311,6 @@ const formStatus=document.getElementById('formStatus');
 
 function selectedAreas(){return areaChecks.filter(x=>x.checked).map(x=>x.value)}
 function syncConditionalFields(){
-  const activityOther=activitySelect.value==='Otro';
-  otherActivityWrap.hidden=!activityOther;
-  otherActivityInput.required=activityOther;
-  if(!activityOther) otherActivityInput.value='';
-
   const otherArea=selectedAreas().includes('Otras');
   otherAreasWrap.hidden=!otherArea;
   otherAreasInput.required=otherArea;
@@ -3371,13 +3348,6 @@ const successState=document.getElementById('successState');
 let googleSubmitPending=false;
 let googleSubmitStartedAt=0;
 
-function buildActivityValue(){
-  const base=activitySelect.value.trim();
-  if(base==='Otro'){
-    return otherActivityInput.value.trim();
-  }
-  return base;
-}
 
 function buildAreasValue(){
   const values=selectedAreas();
@@ -3439,8 +3409,6 @@ function handleCommunitySubmit(e){
     return;
   }
 
-  // Localizamos el transporte oculto EN EL MOMENTO DEL ENVÍO.
-  // Así no dependemos del orden de carga del HTML.
   const transport=getGoogleTransport();
 
   if(!transport.bridge || !transport.target || !transport.nombre || !transport.whatsapp || !transport.actividad || !transport.areas){
@@ -3449,23 +3417,22 @@ function handleCommunitySubmit(e){
     return;
   }
 
-  // Transferimos los datos ya procesados a Google Forms.
+  // Formulario simplificado: solo nombre, teléfono y áreas.
   transport.nombre.value=document.getElementById('nombre').value.trim();
   transport.whatsapp.value=document.getElementById('whatsapp').value.trim();
-  transport.actividad.value=buildActivityValue();
+  transport.actividad.value='No solicitado';
   transport.areas.value=buildAreasValue();
 
-  // Añadimos un estado extra para que el botón Atrás vuelva del proceso al formulario.
+  // Mismo procedimiento original: registrar -> procesar -> abrir solicitud del grupo.
   history.pushState({registrationProcess:true},'',window.location.href);
   showRegistrationLoading();
 
   googleSubmitPending=true;
   googleSubmitStartedAt=Date.now();
 
-  // Envío silencioso dentro del iframe oculto.
   transport.bridge.submit();
 
-  // Respaldo visual por si el navegador no expone el evento load del iframe.
+  // Respaldo por si el navegador no dispara el load del iframe.
   setTimeout(()=>{
     if(googleSubmitPending){
       googleSubmitPending=false;
@@ -3521,15 +3488,9 @@ function smoothFormScroll(target, block='center'){
 function firstIncompleteFormTarget(){
   const nombre=document.getElementById('nombre');
   const whatsapp=document.getElementById('whatsapp');
-  const actividad=document.getElementById('actividad');
 
   if(nombre && !nombre.value.trim()) return nombre.closest('.field');
   if(whatsapp && !whatsapp.value.trim()) return whatsapp.closest('.field');
-  if(actividad && !actividad.value) return actividad.closest('.field');
-
-  if(actividad && actividad.value==='Otro' && otherActivityInput && !otherActivityInput.value.trim()){
-    return otherActivityInput.closest('.field');
-  }
 
   if(selectedAreas().length===0){
     return document.querySelector('.areas-field');
@@ -3573,23 +3534,6 @@ communityForm.querySelectorAll('input,select').forEach(el=>{
       advanceMobileForm();
     }
   });
-});
-
-/* Al escoger la actividad, acercamos el siguiente bloque necesario. */
-activitySelect.addEventListener('change',()=>{
-  syncConditionalFields();
-  if(activitySelect.value==='Otro'){
-    smoothFormScroll(otherActivityInput.closest('.field'),'center');
-  }else{
-    smoothFormScroll(document.querySelector('.areas-field'),'start');
-  }
-});
-
-/* Si escribe la actividad "Otro", avanzamos hacia las áreas al terminar. */
-otherActivityInput.addEventListener('blur',()=>{
-  if(otherActivityInput.required && otherActivityInput.value.trim()){
-    smoothFormScroll(document.querySelector('.areas-field'),'start');
-  }
 });
 
 /*
