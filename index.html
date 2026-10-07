@@ -5552,6 +5552,138 @@ body.welcome-active{
 }
 </style>
 
+
+<style id="v151-welcome-scroll-responsive">
+/* ==========================================================
+   v151 · Bienvenida realmente adaptable y desplazable
+   Soluciona navegadores embebidos y pantallas de poca altura.
+   ========================================================== */
+
+/* El fondo de la página permanece bloqueado, pero NO bloqueamos
+   los gestos verticales dentro de la bienvenida. */
+body.welcome-active{
+  overflow:hidden !important;
+  touch-action:auto !important;
+}
+
+/* Usamos inset:0 como fuente real del alto disponible.
+   Se anulan los límites 100vh/100dvh de versiones anteriores. */
+#welcomeMedina.welcome-medina{
+  box-sizing:border-box !important;
+  position:fixed !important;
+  inset:0 !important;
+
+  width:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-y:contain !important;
+  touch-action:pan-y !important;
+
+  padding:
+    max(14px,env(safe-area-inset-top))
+    14px
+    max(28px,env(safe-area-inset-bottom)) !important;
+
+  scrollbar-width:thin;
+  scrollbar-color:rgba(103,216,245,.42) transparent;
+}
+
+#welcomeMedina.welcome-medina::-webkit-scrollbar{
+  width:7px;
+}
+#welcomeMedina.welcome-medina::-webkit-scrollbar-track{
+  background:transparent;
+}
+#welcomeMedina.welcome-medina::-webkit-scrollbar-thumb{
+  background:rgba(103,216,245,.38);
+  border-radius:999px;
+}
+
+/* La tarjeta jamás se recorta internamente.
+   El desplazamiento pertenece al overlay completo. */
+#welcomeMedina .welcome-medina-card{
+  flex:0 0 auto !important;
+  width:min(700px,100%) !important;
+  max-width:700px !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+
+  /* En pantallas altas queda visualmente centrada.
+     En pantallas bajas los márgenes automáticos colapsan y comienza arriba,
+     de modo que ningún contenido queda inaccesible. */
+  margin:auto 0 !important;
+  padding-top:8px !important;
+  padding-bottom:18px !important;
+}
+
+/* Espacio seguro real al final: importante en Facebook/Instagram
+   y teléfonos con barra de navegación inferior. */
+#welcomeMedina .welcome-hint{
+  margin-bottom:max(8px,env(safe-area-inset-bottom)) !important;
+}
+
+/* Teléfonos: conservamos el diseño aprobado, pero sin forzar
+   que todo quepa artificialmente en una sola pantalla. */
+@media(max-width:699px){
+  #welcomeMedina.welcome-medina{
+    padding:
+      max(12px,env(safe-area-inset-top))
+      14px
+      max(30px,env(safe-area-inset-bottom)) !important;
+  }
+
+  #welcomeMedina .welcome-medina-card{
+    width:100% !important;
+    max-width:520px !important;
+    max-height:none !important;
+    overflow:visible !important;
+    justify-content:flex-start !important;
+    margin:0 !important;
+    padding:12px 4px 20px !important;
+  }
+
+  /* Evita que BIENVENIDO quede pegado o cortado al inicio del scroll. */
+  #welcomeMedina .welcome-kicker{
+    margin-top:2px !important;
+  }
+
+  #welcomeMedina .welcome-hint{
+    margin-bottom:14px !important;
+  }
+}
+
+/* Pantallas especialmente bajas: NO escondemos ni comprimimos contenido;
+   simplemente dejamos que el usuario desplace la bienvenida. */
+@media(max-height:760px){
+  #welcomeMedina .welcome-medina-card{
+    margin:0 !important;
+  }
+}
+
+/* Muy estrechos: asegurar que textos largos no provoquen ancho extra. */
+@media(max-width:390px){
+  #welcomeMedina .welcome-medina-card,
+  #welcomeMedina .welcome-message,
+  #welcomeMedina .welcome-actions,
+  #welcomeMedina .welcome-quote-note,
+  #welcomeMedina .welcome-appointment-note,
+  #welcomeMedina .welcome-hint{
+    max-width:100% !important;
+  }
+}
+</style>
+
 </head>
 <body><div aria-label="Bienvenida a Automotriz Medina" aria-modal="true" class="welcome-medina seq-pending" id="welcomeMedina" role="dialog">
 <div aria-hidden="true" class="welcome-medina-bg">
